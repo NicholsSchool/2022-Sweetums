@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,6 +24,7 @@ public class RobotContainer
 	public static XboxController c1;
 
 	public static DriveTrain driveTrain;
+	public static Shifter shifter; 
 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -33,7 +35,7 @@ public class RobotContainer
     	c1 = new XboxController( 1 );
 		
     	driveTrain = new DriveTrain();
-
+		shifter = new Shifter(); 
     	configureButtonBindings();
   	}
 	
