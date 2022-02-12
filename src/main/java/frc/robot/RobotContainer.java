@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -23,6 +25,7 @@ public class RobotContainer
 	public static XboxController c1;
 
 	public static DriveTrain driveTrain;
+	public static Shooter shooter;
 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -33,6 +36,7 @@ public class RobotContainer
     	c1 = new XboxController( 1 );
 		
     	driveTrain = new DriveTrain();
+		shooter = new Shooter();
 
     	configureButtonBindings();
   	}
