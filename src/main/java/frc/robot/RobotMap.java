@@ -6,4 +6,6 @@ public class RobotMap
     public static final int FRONT_LEFT_DRIVE_ID = 11;
     public static final int BACK_RIGHT_DRIVE_ID = 12;
     public static final int BACK_LEFT_DRIVE_ID = 13;
+    public static final int SHOOTER_ID = 20;
+    public static final int INDEXER_ID = 21;
 }
