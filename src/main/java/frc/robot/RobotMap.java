@@ -23,10 +23,5 @@ public class RobotMap
     
     public static final double GOVERNOR_SLOW = 0.7;
     public static double GOVERNOR = GOVERNOR_SLOW;
-<<<<<<< Updated upstream
     public static final int PISTON_SOLENOID_CHANNEL = 1;
-
-=======
-    public static int PISTON_SOLENOID_CHANNEL = 1;
->>>>>>> Stashed changes
 }
