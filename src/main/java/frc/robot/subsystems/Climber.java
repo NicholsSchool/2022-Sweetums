@@ -19,6 +19,7 @@ public class Climber extends SubsystemBase
     public Climber() 
     {
         climberLeft = new CANSparkMax( RobotMap.CLIMBER_LEFT_ID, MotorType.kBrushless );
+        climberRight = new CANSparkMax( RobotMap.CLIMBER_RIGHT_ID, MotorType.kBrushless );
 
         climberLeft.restoreFactoryDefaults();
         climberRight.restoreFactoryDefaults();
