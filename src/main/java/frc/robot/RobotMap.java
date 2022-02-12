@@ -13,4 +13,11 @@ public class RobotMap
     public static final int INTAKE_ROLLER_ID = 22;
 
     public static final int SORTER_ID = 23;
+
+    public static final int SHIFTER_SOLENOID_CHANNEL = 0; 
+    public static final int PCM_CAN_ID = 51; 
+
+    public static final double GOVERNOR_FAST = 1.0;
+    public static final double GOVERNOR_SLOW = 0.7;
+    public static double GOVERNOR = GOVERNOR_SLOW;
 }
