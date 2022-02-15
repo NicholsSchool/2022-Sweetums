@@ -16,6 +16,9 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.commands.FeedShooter;
 import frc.robot.subsystems.Indexer;
 
+import frc.robot.commands.Climb;
+import frc.robot.subsystems.Climber;
+
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -33,6 +36,7 @@ public class RobotContainer
 	public static DriveTrain driveTrain;
 	public static Shooter shooter;
 	public static Indexer indexer;
+	public static Climber climber;
 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -45,6 +49,7 @@ public class RobotContainer
     	driveTrain = new DriveTrain();
 		shooter = new Shooter();
 		indexer = new Indexer();
+		climber = new Climber();
 
     	configureButtonBindings();
   	}
