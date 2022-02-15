@@ -15,8 +15,13 @@ public class Piston extends SubsystemBase
         piston.set( false );
     }
 
-    public void toggle()
+    public void activate()
     {
         piston.set( true );
+    }
+
+    public void deactivate()
+    {
+        piston.set( false );
     }
 }
