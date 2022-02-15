@@ -15,7 +15,7 @@ public class RobotMap
     public static final int SORTER_ID = 23;
 
     // need correct ID 
-    public static final int WINDOW_ID = 14; 
+    public static final int WINDOW_ID = 30; 
     public static final double SLIDER_SPEED = 0.5; 
 
     public static final int SHIFTER_SOLENOID_CHANNEL = 0; 
