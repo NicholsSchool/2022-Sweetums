@@ -25,7 +25,7 @@ public class Climb extends CommandBase
     @Override
     public void end( boolean interrupted ) 
     {
-        
+        RobotContainer.climber.stop();
     }
 
     @Override
