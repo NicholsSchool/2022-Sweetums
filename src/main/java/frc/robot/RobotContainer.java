@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
+import frc.robot.commands.SlideForward;
+import frc.robot.commands.SlideBackward;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.*;
@@ -30,6 +32,7 @@ public class RobotContainer
 
 	public static DriveTrain driveTrain;
 	public static Shifter shifter; 
+	public static Slider slider; 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
 	 */
@@ -43,6 +46,7 @@ public class RobotContainer
 		
     	driveTrain = new DriveTrain();
 		shifter = new Shifter(); 
+		slider = new Slider(); 
     	configureButtonBindings();
   	}
 	
@@ -54,8 +58,9 @@ public class RobotContainer
 	 */
 	private void configureButtonBindings() 
 	{
-		driveTrain.setDefaultCommand( new Drive() );
-
+		driveTrain.setDefaultCommand( new Drive() ); 
+		j0.b11.whileHeld( new SlideForward() ); 
+		j0.b12.whileHeld( new SlideBackward() ); 
 	}
 
   	/**
