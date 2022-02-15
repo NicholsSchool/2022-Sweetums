@@ -13,7 +13,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Shooter;
 
-import frc.robot.commands.FeedShooter;
 import frc.robot.subsystems.Indexer;
 
 import frc.robot.commands.Climb;

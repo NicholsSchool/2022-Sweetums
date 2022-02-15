@@ -4,8 +4,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -13,8 +11,6 @@ public class Climber extends SubsystemBase
 {
     private CANSparkMax climberLeft;
     private CANSparkMax climberRight;
-
-    private DifferentialDrive diffDrive;
 
     public Climber() 
     {
@@ -24,20 +20,17 @@ public class Climber extends SubsystemBase
         climberLeft.restoreFactoryDefaults();
         climberRight.restoreFactoryDefaults();
 
-        diffDrive = new DifferentialDrive( climberLeft, climberRight );
-
-        climberLeft.follow( climberRight );
-
         climberLeft.setIdleMode( IdleMode.kCoast );
         climberRight.setIdleMode( IdleMode.kCoast );
         
-        climberLeft.setInverted( false );
+        climberLeft.setInverted( true );
         climberRight.setInverted( false );
     }
     
-    public void move( double leftSpeed, double rightSpeed ) 
+    public void move( double speed ) 
     {
-        diffDrive.tankDrive( leftSpeed, rightSpeed );
+        climberLeft.set( speed );
+        climberRight.set( speed );
     }
 
     public void stop() 
