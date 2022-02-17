@@ -26,7 +26,7 @@ public class Shifter extends SubsystemBase
     public void lowGear()
     {
         shifter.set( false );
-        
+
         RobotMap.GOVERNOR = RobotMap.GOVERNOR_SLOW;
     }
 }
