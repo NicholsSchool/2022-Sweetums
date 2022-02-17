@@ -17,7 +17,7 @@ public class SortB extends CommandBase
     @Override
     public void execute() 
     {
-            RobotContainer.sorter.move( Constants.SORTER_SPEED );
+        RobotContainer.sorter.move( Constants.SORTER_SPEED );
     }
 
     @Override
