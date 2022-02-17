@@ -20,13 +20,10 @@ public class Shoot extends CommandBase
     @Override
     public void execute()
     {
-        while( RobotContainer.shooter.getVelocity() < Constants.DESIRED_V ) 
-        {
-            RobotContainer.shooter.move( Constants.SHOOTER_POWER );
-        }
-
         RobotContainer.shooter.move( Constants.SHOOTER_POWER );
-        RobotContainer.indexer.move( Constants.INDEXER_POWER );
+
+        if( RobotContainer.shooter.getVelocity() >= Constants.SHOOTER_V )
+            RobotContainer.indexer.move( Constants.INDEXER_POWER );
     }
 
     @Override
