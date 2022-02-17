@@ -35,7 +35,8 @@ public class RobotContainer
     	c1 = new XboxController( 1 );
 		
     	driveTrain = new DriveTrain();
-		shifter = new Shifter(); 
+		shifter = new Shifter();
+
     	configureButtonBindings();
   	}
 	

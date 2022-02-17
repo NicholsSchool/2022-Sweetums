@@ -12,18 +12,21 @@ public class Shifter extends SubsystemBase
     public Shifter()
     {
         shifter = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.SHIFTER_SOLENOID_CHANNEL );
+
         shifter.set( true );
     }
 
     public void highGear()
     {
         shifter.set( true );
+
         RobotMap.GOVERNOR = RobotMap.GOVERNOR_FAST;
     }
 
     public void lowGear()
     {
         shifter.set( false );
+        
         RobotMap.GOVERNOR = RobotMap.GOVERNOR_SLOW;
     }
 }
