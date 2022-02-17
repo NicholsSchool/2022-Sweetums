@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.Sorter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -23,6 +24,7 @@ public class RobotContainer
 	public static XboxController c0;
 	public static XboxController c1;
 
+	public static Sorter sorter;
 	public static DriveTrain driveTrain;
 	public static Roller roller;
 

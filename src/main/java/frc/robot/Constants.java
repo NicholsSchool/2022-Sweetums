@@ -15,4 +15,5 @@ package frc.robot;
 public final class Constants 
 {
     public static final double ROLLER_SPEED = 0.2;
+    public static final double SORTER_SPEED = 0.2;
 }
