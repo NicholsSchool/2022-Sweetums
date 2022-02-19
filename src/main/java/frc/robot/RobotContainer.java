@@ -6,10 +6,16 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Roller;
 import frc.robot.subsystems.Sorter;
+
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Indexer;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.*;
 
@@ -29,6 +35,8 @@ public class RobotContainer
 	public static Roller roller;
 	public static Shifter shifter; 
 	public static Sorter sorter;
+	public static Shooter shooter;
+	public static Indexer indexer;
 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -42,6 +50,8 @@ public class RobotContainer
 		roller = new Roller();
 		shifter = new Shifter();
 		sorter = new Sorter();
+		shooter = new Shooter();
+		indexer = new Indexer();
 
     	configureButtonBindings();
   	}

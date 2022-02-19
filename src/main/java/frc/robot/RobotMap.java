@@ -18,4 +18,7 @@ public class RobotMap
     public static final double GOVERNOR_SLOW = 0.7;
     public static double GOVERNOR = GOVERNOR_SLOW;
 
+    public static final int SHOOTER_ID = 20;
+    
+    public static final int INDEXER_ID = 21;
 }
