@@ -18,23 +18,13 @@ public class Shifter extends SubsystemBase
 
         shifter.set( true );
     }
-
-    public boolean get() 
+    
+    public void toggle() 
     {
-        return shifter.get();
+        boolean shifterState = shifter.get();
+        shifter.set( !shifterState );
     }
 
-    public void highGear()
-    {
-        shifter.set( true );
 
-        RobotMap.GOVERNOR = RobotMap.GOVERNOR_FAST;
-    }
-
-    public void lowGear()
-    {
-        shifter.set( false );
-
-        RobotMap.GOVERNOR = RobotMap.GOVERNOR_SLOW;
-    }
+    
 }

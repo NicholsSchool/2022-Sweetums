@@ -7,10 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 
+
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.util.*;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,16 +24,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer 
 {	
 	// Controllers 
+	public static JoystickController j0;
+	public static JoystickController j1;
 	public static XboxController c0;
 	public static XboxController c1;
 
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
-	public static Piston piston;
 	public static Roller roller;
 	public static Shifter shifter; 
-	public static Slider slider;
 	public static Shooter shooter;
+	public static Slider slider;
 	public static Sorter sorter;
 
   	/** 
@@ -43,11 +47,10 @@ public class RobotContainer
 		
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
-		piston = new Piston();
 		roller = new Roller();
 		shifter = new Shifter();
-		slider = new Slider();
 		shooter = new Shooter();
+		slider = new Slider();
 		sorter = new Sorter();
 
     	configureButtonBindings();
@@ -62,15 +65,10 @@ public class RobotContainer
 	private void configureButtonBindings() 
 	{
 		driveTrain.setDefaultCommand( new Drive() );
-	}
+		//Driver Controller
+		
+        j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-	public static void getRobotState() 
-	{
-		Robot.state.put( "Ball", '!' );
-		Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
-		Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
-		Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
-		System.out.println( Robot.state );
 	}
 
   	/**
