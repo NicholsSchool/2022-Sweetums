@@ -23,4 +23,5 @@ public class RobotMap
     public static final int INDEXER_ID = 21;
     
     public static final int PISTON_SOLENOID_CHANNEL = 1;
+    public static final int SLIDER_SOLENOID_CHANNEL = 2; //don't know the correct ID
 }
