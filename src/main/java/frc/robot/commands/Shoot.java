@@ -22,7 +22,7 @@ public class Shoot extends CommandBase
     {
         RobotContainer.shooter.move( Constants.SHOOTER_POWER );
 
-        if( RobotContainer.shooter.getVelocity() >= Constants.SHOOTER_V )
+        if( RobotContainer.shooter.getVelocity() >= Constants.shooterVelocity )
             RobotContainer.indexer.move( Constants.INDEXER_POWER );
     }
 
