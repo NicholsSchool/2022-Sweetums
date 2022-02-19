@@ -24,4 +24,5 @@ public class RobotMap
     public static final double GOVERNOR_SLOW = 0.7;
     public static double GOVERNOR = GOVERNOR_SLOW;
     public static final int PISTON_SOLENOID_CHANNEL = 1;
+    public static final int SLIDER_SOLENOID_CHANNEL = 2; //don't know the correct ID
 }

@@ -15,7 +15,7 @@ public class Piston extends SubsystemBase
     public Piston()
     {
         piston = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.PISTON_SOLENOID_CHANNEL );
-        
+
         piston.set( false );
     }
 
