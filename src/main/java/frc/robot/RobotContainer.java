@@ -5,8 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -26,11 +24,12 @@ public class RobotContainer
 	// Controllers 
 	public static JoystickController j0;
 	public static JoystickController j1;
-	public static XboxController c0;
-	public static XboxController c1;
+	public static XboxController c2;
 
+	// Subsystems
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
+	public static Piston piston;
 	public static Roller roller;
 	public static Shifter shifter; 
 	public static Shooter shooter;
@@ -42,11 +41,13 @@ public class RobotContainer
 	 */
   	public RobotContainer() 
 	{
-    	c0 = new XboxController( 0 );
-    	c1 = new XboxController( 1 );
+    	j0 = new JoystickController( 0 );
+		j1 = new JoystickController( 1 );
+    	c2 = new XboxController( 2 );
 		
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
+		piston = new Piston();
 		roller = new Roller();
 		shifter = new Shifter();
 		shooter = new Shooter();
@@ -65,10 +66,27 @@ public class RobotContainer
 	private void configureButtonBindings() 
 	{
 		driveTrain.setDefaultCommand( new Drive() );
-		//Driver Controller
-		
+
+		// Driver
         j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
+		j1.b1.whenPressed( new InstantCommand(() -> piston.activate()) );
+		j1.b1.whileHeld( new TakeIn().alongWith( new Sort() ) );
+		j1.b1.whenReleased( new InstantCommand(() -> piston.deactivate()) );
+
+		// Operator
+		c2.rTrigger.whileHeld( new ShootHigh() );
+		c2.rBumper.whileHeld( new ShootLow() );
+		c2.y.whileHeld( new ThrowAway() );
+	}
+
+	public static void getRobotState() 
+	{
+		Robot.state.put( "Ball", '!' );
+		Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
+		Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
+		Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
+		System.out.println( Robot.state );
 	}
 
   	/**

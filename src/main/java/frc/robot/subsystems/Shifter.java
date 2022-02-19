@@ -18,13 +18,15 @@ public class Shifter extends SubsystemBase
 
         shifter.set( true );
     }
+
+    public boolean get() 
+    {
+        return shifter.get();
+    }
     
     public void toggle() 
     {
         boolean shifterState = shifter.get();
         shifter.set( !shifterState );
     }
-
-
-    
 }

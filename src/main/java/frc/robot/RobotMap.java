@@ -10,8 +10,6 @@ public class RobotMap
     public static final int INTAKE_ROLLER_ID = 22;
     public static final int SORTER_ID = 23;
 
-    public static final int SHIFTER_SOLENOID_CHANNEL = 0;
-
     public static final int PCM_CAN_ID = 51; // don't have the correct ID
 
     public static final double GOVERNOR_FAST = 1.0;
@@ -22,6 +20,9 @@ public class RobotMap
     
     public static final int INDEXER_ID = 21;
     
+    public static final int SHIFTER_SOLENOID_CHANNEL = 0;
+
     public static final int PISTON_SOLENOID_CHANNEL = 1;
-    public static final int SLIDER_SOLENOID_CHANNEL = 2; //don't know the correct ID
+
+    public static final int SLIDER_SOLENOID_CHANNEL = 2;
 }

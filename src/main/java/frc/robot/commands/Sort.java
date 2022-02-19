@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class RollBackward extends CommandBase 
+public class Sort extends CommandBase 
 {
-    public RollBackward() 
+    public Sort() 
     {
-        addRequirements( RobotContainer.roller );
+        addRequirements( RobotContainer.sorter );
     }
 
     @Override
@@ -17,13 +17,13 @@ public class RollBackward extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.roller.move( -Constants.ROLLER_SPEED );
+        RobotContainer.sorter.move( Constants.SORTER_SPEED );
     }
 
     @Override
     public void end( boolean interrupted )
     {
-        RobotContainer.roller.stop();
+        RobotContainer.sorter.stop();
     }
 
     @Override

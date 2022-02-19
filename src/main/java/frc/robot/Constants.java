@@ -22,8 +22,7 @@ public final class Constants
     
     public static final double INDEXER_POWER = 1.0;
 
-    public static final double HIGH_GOAL_V = 1.0;
-    public static final double LOW_GOAL_V = 1.0;
-    public static final double THROW_AWAY_V = 1.0;
-    public static double shooterVelocity = HIGH_GOAL_V;
+    public static final double HIGH_GOAL_VELOCITY = 100.0;
+    public static final double LOW_GOAL_VELOCITY = 50.0;
+    public static final double THROW_AWAY_VELOCITY = 10.0;
 }

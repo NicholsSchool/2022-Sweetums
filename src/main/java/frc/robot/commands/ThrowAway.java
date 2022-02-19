@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class Shoot extends CommandBase
+public class ThrowAway extends CommandBase
 {
-    public Shoot() 
+    public ThrowAway() 
     {
         addRequirements( RobotContainer.shooter, RobotContainer.indexer );
     }
@@ -22,7 +22,7 @@ public class Shoot extends CommandBase
     {
         RobotContainer.shooter.move( Constants.SHOOTER_POWER );
 
-        if( RobotContainer.shooter.getVelocity() >= Constants.shooterVelocity )
+        if( RobotContainer.shooter.getVelocity() >= Constants.THROW_AWAY_VELOCITY )
             RobotContainer.indexer.move( Constants.INDEXER_POWER );
     }
 

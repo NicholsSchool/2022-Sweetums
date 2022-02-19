@@ -34,7 +34,6 @@ public class Robot extends TimedRobot
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
-
 	}
 
 	/**
@@ -52,8 +51,6 @@ public class Robot extends TimedRobot
     	// and running subsystem periodic() methods.  This must be called from the robot's periodic
     	// block in order for anything in the Command-based framework to work.
     	CommandScheduler.getInstance().run();
-
-		RobotContainer.getRobotState();
 	}
 
 	/** 
@@ -97,18 +94,21 @@ public class Robot extends TimedRobot
 		}
 	}
 
-  /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {}
+  	/** This function is called periodically during operator control. */
+  	@Override
+  	public void teleopPeriodic() 
+  	{
+		RobotContainer.getRobotState();
+  	}
+	
+	@Override
+	public void testInit() 
+	{
+		// Cancels all running commands at the start of test mode.
+		CommandScheduler.getInstance().cancelAll();
+	}
 
-  @Override
-  public void testInit() 
-  {
-    // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
-  }
-
-  /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {}
+	/** This function is called periodically during test mode. */
+	@Override
+	public void testPeriodic() {}
 }

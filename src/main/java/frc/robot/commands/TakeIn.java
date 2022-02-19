@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class RollForward extends CommandBase 
+public class TakeIn extends CommandBase 
 {
-    public RollForward() 
+    public TakeIn() 
     {
         addRequirements( RobotContainer.roller);
     }
