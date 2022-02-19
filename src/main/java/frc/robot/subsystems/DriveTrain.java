@@ -40,7 +40,7 @@ public class DriveTrain extends SubsystemBase
 
     public void move( double leftSpeed, double rightSpeed ) 
     {
-        diffDrive.tankDrive(leftSpeed, rightSpeed);
+        diffDrive.tankDrive( leftSpeed, rightSpeed );
     }
 
     public void stop() 

@@ -19,6 +19,11 @@ public class Shifter extends SubsystemBase
         shifter.set( true );
     }
 
+    public boolean get() 
+    {
+        return shifter.get();
+    }
+
     public void highGear()
     {
         shifter.set( true );

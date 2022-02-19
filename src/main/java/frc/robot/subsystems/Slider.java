@@ -19,6 +19,11 @@ public class Slider extends SubsystemBase
         slider.set( true );
     }
 
+    public boolean get() 
+    {
+        return slider.get();
+    }
+
     public void releaseSlider()
     {
         slider.set( false );

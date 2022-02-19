@@ -19,6 +19,11 @@ public class Piston extends SubsystemBase
         piston.set( false );
     }
 
+    public boolean get() 
+    {
+        return piston.get();
+    }
+
     public void activate()
     {
         piston.set( true );
