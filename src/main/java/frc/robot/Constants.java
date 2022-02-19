@@ -14,6 +14,13 @@ package frc.robot;
  */
 public final class Constants 
 {
+<<<<<<< HEAD
+=======
+    public static final double ROLLER_SPEED = 0.2;
+    public static final double SORTER_SPEED = 0.2;
+    public static final double SHOOTER_POWER = 1.0;
+    public static final double SHOOTER_V = 1.0;
+>>>>>>> c6e1b5c8965741a4518f09fbbf217412afb283b2
     public static final double INDEXER_POWER = 1.0;
     public static final double SHOOTER_POWER = 1.0;
 

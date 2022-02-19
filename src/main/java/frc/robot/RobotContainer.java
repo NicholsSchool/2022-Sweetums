@@ -9,13 +9,15 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.Sorter;
 
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Shooter;
-
 import frc.robot.subsystems.Indexer;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,6 +32,9 @@ public class RobotContainer
 	public static XboxController c1;
 
 	public static DriveTrain driveTrain;
+	public static Roller roller;
+	public static Shifter shifter; 
+	public static Sorter sorter;
 	public static Shooter shooter;
 	public static Indexer indexer;
 
@@ -42,6 +47,9 @@ public class RobotContainer
     	c1 = new XboxController( 1 );
 		
     	driveTrain = new DriveTrain();
+		roller = new Roller();
+		shifter = new Shifter();
+		sorter = new Sorter();
 		shooter = new Shooter();
 		indexer = new Indexer();
 
