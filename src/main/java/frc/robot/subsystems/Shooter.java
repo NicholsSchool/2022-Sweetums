@@ -18,7 +18,7 @@ public class Shooter extends SubsystemBase
         
         shooter.configSelectedFeedbackSensor( FeedbackDevice.IntegratedSensor );
         
-        shooter.setInverted( false );
+        shooter.setInverted( true );
         
         shooter.setNeutralMode( NeutralMode.Coast );
     }

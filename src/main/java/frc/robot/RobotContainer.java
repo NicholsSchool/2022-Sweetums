@@ -25,16 +25,16 @@ public class RobotContainer
 	public static JoystickController j0;
 	public static JoystickController j1;
 	public static XboxController c2;
+	public static JoystickController j3;
 
 	// Subsystems
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
-	public static Piston piston;
-	public static Roller roller;
-	public static Shifter shifter; 
+	public static Intake intake;
+	// public static Roller roller;
+	// public static Shifter shifter; 
 	public static Shooter shooter;
-	public static Slider slider;
-	public static Sorter sorter;
+	// public static Slider slider;
 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -44,15 +44,15 @@ public class RobotContainer
     	j0 = new JoystickController( 0 );
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
+		j3 = new JoystickController( 3 );
 		
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
-		piston = new Piston();
-		roller = new Roller();
-		shifter = new Shifter();
+		intake = new Intake();
+		// roller = new Roller();
+		// shifter = new Shifter();
 		shooter = new Shooter();
-		slider = new Slider();
-		sorter = new Sorter();
+		// slider = new Slider();
 
     	configureButtonBindings();
   	}
@@ -67,25 +67,30 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
-		// Driver
-        j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
+		intake.setDefaultCommand( new TakeIn() );
 
-		j1.b1.whenPressed( new InstantCommand(() -> piston.activate()) );
-		j1.b1.whileHeld( new TakeIn().alongWith( new Sort() ) );
-		j1.b1.whenReleased( new InstantCommand(() -> piston.deactivate()) );
+		// Driver
+        // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
+
+		// j1.b1.whenPressed( new InstantCommand(() -> piston.activate()) );
+		// j1.b1.whileHeld( new TakeIn().alongWith( new Sort() ) );
+		// j1.b1.whenReleased( new InstantCommand(() -> piston.deactivate()) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.y.whileHeld( new ThrowAway() );
+
+		j3.b1.whenPressed( new InstantCommand(() -> intake.zeroEncoder() ) );
 	}
 
 	public static void getRobotState() 
 	{
-		Robot.state.put( "Ball", '!' );
-		Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
-		Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
-		Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
+		Robot.state.put( "Shooter Velocity", RobotContainer.shooter.getVelocity() );
+		// Robot.state.put( "Ball", '!' );
+		// Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
+		// // Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
+		// Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
 		System.out.println( Robot.state );
 	}
 

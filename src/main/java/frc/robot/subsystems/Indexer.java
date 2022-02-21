@@ -17,7 +17,7 @@ public class Indexer extends SubsystemBase
         
         indexer.restoreFactoryDefaults();
 
-        indexer.setIdleMode( IdleMode.kCoast );
+        indexer.setIdleMode( IdleMode.kBrake );
         
         indexer.setInverted( false );
     }

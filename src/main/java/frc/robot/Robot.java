@@ -92,6 +92,8 @@ public class Robot extends TimedRobot
 		{
 			m_autonomousCommand.cancel();
 		}
+
+		RobotContainer.driveTrain.coast();
 	}
 
   	/** This function is called periodically during operator control. */
