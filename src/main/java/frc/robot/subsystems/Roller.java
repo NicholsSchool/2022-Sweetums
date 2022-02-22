@@ -8,27 +8,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 public class Roller extends SubsystemBase 
-{  
-    private CANSparkMax intake;
+{
+    private CANSparkMax roller;
 
     public Roller() 
     {
-        intake = new CANSparkMax( RobotMap.INTAKE_ROLLER_ID, MotorType.kBrushless );
+        roller = new CANSparkMax( RobotMap.LEFT_INTAKE_ID, MotorType.kBrushless );
 
-        intake.restoreFactoryDefaults();
+        roller.restoreFactoryDefaults();
 
-        intake.setIdleMode( IdleMode.kCoast );
+        roller.setIdleMode( IdleMode.kBrake );
         
-        intake.setInverted( false );
-    }
-
-    public void move( double speed ) 
-    {
-        intake.set( speed );
-    }
-
-    public void stop() 
-    {
-        intake.stopMotor();
+        roller.setInverted( false );
     }
 }
