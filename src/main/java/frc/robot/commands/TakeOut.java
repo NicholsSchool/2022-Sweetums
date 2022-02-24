@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class TakeIn extends CommandBase 
+public class TakeOut extends CommandBase 
 {
-    public TakeIn() 
+    public TakeOut() 
     {
         addRequirements( RobotContainer.intake );
     }
@@ -17,7 +17,7 @@ public class TakeIn extends CommandBase
     @Override
     public void execute()
     {
-        RobotContainer.roller.move( Constants.INTAKE_SPEED );
+        RobotContainer.roller.move( Constants.OUTTAKE_SPEED );
     }
 
     @Override

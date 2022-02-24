@@ -4,8 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
-
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.util.*;
@@ -27,11 +28,13 @@ public class RobotContainer
 	public static XboxController c2;
 	public static JoystickController j3;
 
+	Compressor compressor;
+
 	// Subsystems
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
 	public static Intake intake;
-	// public static Roller roller;
+	public static Roller roller;
 	// public static Shifter shifter; 
 	public static Shooter shooter;
 	// public static Slider slider;
@@ -45,11 +48,13 @@ public class RobotContainer
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
 		j3 = new JoystickController( 3 );
+
+		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
 		intake = new Intake();
-		// roller = new Roller();
+		roller = new Roller();
 		// shifter = new Shifter();
 		shooter = new Shooter();
 		// slider = new Slider();
@@ -67,13 +72,14 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
-		intake.setDefaultCommand( new TakeIn() );
+		intake.setDefaultCommand( new MoveIntake() );
 
 		// Driver
         // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
 		// j1.b1.whenPressed( new InstantCommand(() -> piston.activate()) );
-		// j1.b1.whileHeld( new TakeIn().alongWith( new Sort() ) );
+		j0.b1.whileHeld( new TakeOut() );
+		j1.b1.whileHeld( new TakeIn() );
 		// j1.b1.whenReleased( new InstantCommand(() -> piston.deactivate()) );
 
 		// Operator
@@ -82,6 +88,8 @@ public class RobotContainer
 		c2.y.whileHeld( new ThrowAway() );
 
 		j3.b1.whenPressed( new InstantCommand(() -> intake.zeroEncoder() ) );
+		j3.b2.whenPressed( new InstantCommand(() -> intake.goToPosition( -50 ) ) );
+		j3.b5.whenPressed( new InstantCommand(() -> intake.goToPosition( 0 ) ) );
 	}
 
 	public static void getRobotState() 

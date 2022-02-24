@@ -20,9 +20,9 @@ public class ThrowAway extends CommandBase
     @Override
     public void execute()
     {
-        RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
-
-        if( RobotContainer.shooter.getVelocity() >= Constants.THROW_AWAY_VELOCITY )
+        if( RobotContainer.shooter.getVelocity() < Constants.THROW_AWAY_VELOCITY )
+            RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
+        else
             RobotContainer.indexer.move( Constants.INDEXER_SPEED );
     }
 

@@ -21,4 +21,14 @@ public class Roller extends SubsystemBase
         
         roller.setInverted( false );
     }
+
+    public void move( double speed ) 
+    {
+        roller.set( speed );
+    }
+
+    public void stop() 
+    {
+        roller.stopMotor();
+    }
 }

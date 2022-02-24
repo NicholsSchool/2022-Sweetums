@@ -17,7 +17,7 @@ public class RobotMap
     public static final int RIGHT_INTAKE_ID = 45;
     public static final int LEFT_INTAKE_ID = 44;
 
-    public static final int PCM_CAN_ID = 51; // don't have the correct ID
+    public static final int PCM_CAN_ID = 0; // don't have the correct ID
 
     public static final double GOVERNOR_FAST = 1.0;
     public static final double GOVERNOR_SLOW = 0.7;
