@@ -34,6 +34,7 @@ public class RobotContainer
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
 	public static Intake intake;
+	public static IntakeSwitch intakeSwitch;
 	public static Roller roller;
 	public static Shifter shifter; 
 	public static Shooter shooter;
@@ -53,6 +54,7 @@ public class RobotContainer
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
 		intake = new Intake();
+		intakeSwitch = new IntakeSwitch();
 		roller = new Roller();
 		shifter = new Shifter();
 		shooter = new Shooter();
@@ -70,6 +72,8 @@ public class RobotContainer
 	private void configureButtonBindings() 
 	{
 		driveTrain.setDefaultCommand( new Drive() );
+
+		intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
 
 		// Driver
         j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );

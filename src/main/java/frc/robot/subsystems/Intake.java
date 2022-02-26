@@ -54,6 +54,12 @@ public class Intake extends SubsystemBase
         intake.stopMotor();
     }
 
+    public void stopAndSetEncoder( double position ) 
+    {
+        encoder.setPosition( position );
+        stop();
+    }
+
     public void goToPosition( double position ) 
     {
         pidController.setReference( position, CANSparkMax.ControlType.kPosition );
@@ -62,10 +68,5 @@ public class Intake extends SubsystemBase
     public double getPosition() 
     {
         return encoder.getPosition();
-    }
-
-    public void zeroEncoder() 
-    {
-        encoder.setPosition( 0 );
     }
 }
