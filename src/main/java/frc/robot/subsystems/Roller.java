@@ -19,7 +19,7 @@ public class Roller extends SubsystemBase
 
         roller.setIdleMode( IdleMode.kBrake );
         
-        roller.setInverted( false );
+        roller.setInverted( true );
     }
 
     public void move( double speed ) 

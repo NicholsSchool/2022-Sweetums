@@ -6,9 +6,11 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.Vars;
 
 public class Intake extends SubsystemBase
 {
@@ -16,8 +18,12 @@ public class Intake extends SubsystemBase
     private RelativeEncoder encoder;
     private SparkMaxPIDController pidController;
 
-    public Intake() 
+    private DigitalInput button;
+
+    public Intake()
     {
+        Vars.posAtStart = getPosition();
+
         // Intake
         intake = new CANSparkMax( RobotMap.RIGHT_INTAKE_ID, MotorType.kBrushless );
 
@@ -42,11 +48,9 @@ public class Intake extends SubsystemBase
         pidController.setIZone( Constants.INTAKE_Iz );
         pidController.setFF( Constants.INTAKE_FF );
         pidController.setOutputRange( Constants.INTAKE_MIN_OUTPUT , Constants.INTAKE_MAX_OUTPUT );
-    }
 
-    public void move( double speed ) 
-    {
-        intake.set( speed );
+        // Button
+        button = new DigitalInput( RobotMap.BUTTON_CHANNEL);
     }
 
     public void stop() 
@@ -54,19 +58,29 @@ public class Intake extends SubsystemBase
         intake.stopMotor();
     }
 
-    public void stopAndSetEncoder( double position ) 
+    public double getPosition() 
+    {
+        return encoder.getPosition();
+    }
+
+    public void setPosition( double position ) 
     {
         encoder.setPosition( position );
-        stop();
+    }
+
+    public void resetEncoder()
+    {
+        setPosition( 0 );
     }
 
     public void goToPosition( double position ) 
     {
-        pidController.setReference( position, CANSparkMax.ControlType.kPosition );
+        if( position < 0 )
+            pidController.setReference( position, CANSparkMax.ControlType.kPosition );
     }
 
-    public double getPosition() 
+    public boolean isButtonPressed() 
     {
-        return encoder.getPosition();
+        return !button.get();
     }
 }

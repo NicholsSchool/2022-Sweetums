@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
+// import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.*;
@@ -34,9 +34,8 @@ public class RobotContainer
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
 	public static Intake intake;
-	public static IntakeSwitch intakeSwitch;
 	public static Roller roller;
-	public static Shifter shifter; 
+	// public static Shifter shifter; 
 	public static Shooter shooter;
 	// public static Slider slider;
 
@@ -54,9 +53,8 @@ public class RobotContainer
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
 		intake = new Intake();
-		intakeSwitch = new IntakeSwitch();
 		roller = new Roller();
-		shifter = new Shifter();
+		// shifter = new Shifter();
 		shooter = new Shooter();
 		// slider = new Slider();
 
@@ -73,14 +71,14 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
-		intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
+		// intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
 
 		// Driver
-        j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
+        // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		j1.b1.whenPressed( new IntakeDown() );
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new IntakeUp() );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( Vars.up ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
@@ -91,6 +89,7 @@ public class RobotContainer
 	public static void getRobotState() 
 	{
 		Robot.state.put( "Shooter Velocity", RobotContainer.shooter.getVelocity() );
+		Robot.state.put( "Intake Switch", intake.isButtonPressed() );
 		// Robot.state.put( "Ball", '!' );
 		// Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
 		// // Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );

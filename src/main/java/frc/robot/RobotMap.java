@@ -27,5 +27,5 @@ public class RobotMap
 
     public static final int SLIDER_SOLENOID_CHANNEL = 1; // May be 0
     
-    public static final int INTAKE_LIMIT_SWITCH_CHANNEL = 0;
+    public static final int BUTTON_CHANNEL = 0;
 }
