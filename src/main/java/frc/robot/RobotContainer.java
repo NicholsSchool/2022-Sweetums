@@ -28,7 +28,7 @@ public class RobotContainer
 	public static XboxController c2;
 
 	// Compressor
-	Compressor compressor;
+	// Compressor compressor;
 
 	// Subsystems
 	public static DriveTrain driveTrain;
@@ -48,7 +48,7 @@ public class RobotContainer
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
 
-		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
+		// compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
