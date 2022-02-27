@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class MoveIntake extends CommandBase 
+public class IntakeUp extends CommandBase 
 {
-    public MoveIntake() 
+    public IntakeUp() 
     {
         addRequirements( RobotContainer.intake );
     }
@@ -16,7 +17,7 @@ public class MoveIntake extends CommandBase
     @Override
     public void execute()
     {
-        RobotContainer.intake.move( -RobotContainer.j3.getY() );
+        RobotContainer.intake.goToPosition( Constants.UP );
     }
 
     @Override

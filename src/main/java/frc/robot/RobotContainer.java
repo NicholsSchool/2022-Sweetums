@@ -26,7 +26,6 @@ public class RobotContainer
 	public static JoystickController j0;
 	public static JoystickController j1;
 	public static XboxController c2;
-	public static JoystickController j3;
 
 	// Compressor
 	Compressor compressor;
@@ -36,7 +35,7 @@ public class RobotContainer
 	public static Indexer indexer;
 	public static Intake intake;
 	public static Roller roller;
-	// public static Shifter shifter; 
+	public static Shifter shifter; 
 	public static Shooter shooter;
 	// public static Slider slider;
 
@@ -48,7 +47,6 @@ public class RobotContainer
     	j0 = new JoystickController( 0 );
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
-		j3 = new JoystickController( 3 );
 
 		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
@@ -56,7 +54,7 @@ public class RobotContainer
 		indexer = new Indexer();
 		intake = new Intake();
 		roller = new Roller();
-		// shifter = new Shifter();
+		shifter = new Shifter();
 		shooter = new Shooter();
 		// slider = new Slider();
 
@@ -73,24 +71,17 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
-		intake.setDefaultCommand( new MoveIntake() );
-
 		// Driver
-        // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
+        j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		// j1.b1.whenPressed( new InstantCommand(() -> piston.activate()) );
-		j0.b1.whileHeld( new TakeOut() );
+		j1.b1.whenPressed( new IntakeDown() );
 		j1.b1.whileHeld( new TakeIn() );
-		// j1.b1.whenReleased( new InstantCommand(() -> piston.deactivate()) );
+		j1.b1.whenReleased( new IntakeUp() );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.y.whileHeld( new ThrowAway() );
-
-		j3.b1.whenPressed( new InstantCommand(() -> intake.zeroEncoder() ) );
-		j3.b2.whenPressed( new InstantCommand(() -> intake.goToPosition( -50 ) ) );
-		j3.b5.whenPressed( new InstantCommand(() -> intake.goToPosition( 0 ) ) );
 	}
 
 	public static void getRobotState() 

@@ -37,11 +37,7 @@ public final class Constants
     public static final double INTAKE_MAX_OUTPUT = 0.05;
     public static final double INTAKE_MIN_OUTPUT = -0.05;
 
-    // Intake Speed
-    public static final double INTAKE_SPEED = 0.5; 
-    public static final double OUTTAKE_SPEED = -0.5; 
-
     // Intake Positions
-    public static final double GROUND = 0;
-    public static final double UP = -50;
+    public static final double DOWN = 50;
+    public static final double UP = 0;
 }
