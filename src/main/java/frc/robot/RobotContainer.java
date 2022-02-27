@@ -28,6 +28,7 @@ public class RobotContainer
 	public static XboxController c2;
 	public static JoystickController j3;
 
+	// Compressor
 	Compressor compressor;
 
 	// Subsystems

@@ -8,7 +8,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Intake extends SubsystemBase
@@ -19,6 +18,7 @@ public class Intake extends SubsystemBase
 
     public Intake() 
     {
+        // Intake
         intake = new CANSparkMax( RobotMap.RIGHT_INTAKE_ID, MotorType.kBrushless );
 
         intake.restoreFactoryDefaults();
@@ -27,12 +27,15 @@ public class Intake extends SubsystemBase
         
         intake.setInverted( false );
 
+        // Encoder
         encoder = intake.getEncoder();
 
+        // PID Controller
         pidController = intake.getPIDController();
 
         pidController.setFeedbackDevice( encoder );
 
+        // PID Settings
         pidController.setP( Constants.INTAKE_P );
         pidController.setI( Constants.INTAKE_I );
         pidController.setD( Constants.INTAKE_D );
@@ -44,9 +47,6 @@ public class Intake extends SubsystemBase
     public void move( double speed ) 
     {
         intake.set( speed );
-
-        Robot.state.put( "Intake Speed", String.format( "%1.2f", speed ) );
-        Robot.state.put( "Encoder Position", String.format( "%1.2f", getPosition() ) );
     }
 
     public void stop() 
