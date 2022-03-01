@@ -20,9 +20,9 @@ public class ShootHigh extends CommandBase
     @Override
     public void execute()
     {
-        if( RobotContainer.shooter.getVelocity() < Constants.HIGH_GOAL_VELOCITY )
-            RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
-        else
+        RobotContainer.shooter.setVelocity( Constants.HIGH_GOAL_VELOCITY );
+
+        if( Math.abs( RobotContainer.shooter.getVelocity() - Constants.HIGH_GOAL_VELOCITY ) < Constants.CLOSE_ENOUGH )
             RobotContainer.indexer.move( Constants.INDEXER_SPEED );
     }
 

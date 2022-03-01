@@ -19,6 +19,7 @@ public final class Constants
 
     // Shooter Power
     public static final double SHOOTER_SPEED = 1.0;
+    public static final double CLOSE_ENOUGH = 250.0;
     
     // Indexer Power
     public static final double INDEXER_SPEED = 1.0;
@@ -36,4 +37,11 @@ public final class Constants
     public static final double INTAKE_FF = 0;
     public static final double INTAKE_MAX_OUTPUT = 0.25;
     public static final double INTAKE_MIN_OUTPUT = -0.25;
+
+    // Shooter PID Control Loop Constants
+    public static final double SHOOTER_F = 0.057;
+    public static final double SHOOTER_P = 0.14;
+    public static final double SHOOTER_I = 0;
+    public static final double SHOOTER_D = 0;
+    public static final double SHOOTER_RAMP_TIME = 1;
 }

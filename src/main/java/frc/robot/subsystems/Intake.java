@@ -22,8 +22,6 @@ public class Intake extends SubsystemBase
 
     public Intake()
     {
-        Vars.posAtStart = getPosition();
-
         // Intake
         intake = new CANSparkMax( RobotMap.RIGHT_INTAKE_ID, MotorType.kBrushless );
 
@@ -35,6 +33,8 @@ public class Intake extends SubsystemBase
 
         // Encoder
         encoder = intake.getEncoder();
+
+        Vars.posAtStart = getPosition();
 
         // PID Controller
         pidController = intake.getPIDController();

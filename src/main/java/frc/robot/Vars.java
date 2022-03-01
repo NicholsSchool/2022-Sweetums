@@ -4,5 +4,5 @@ public class Vars
 {
     public static double posAtStart;
     public static double up;
-    public static boolean foundUp = false;  
+    public static boolean foundUp = false;
 }
