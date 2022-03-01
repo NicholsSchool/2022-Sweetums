@@ -5,10 +5,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class JoystickController extends Joystick
  {
+<<<<<<< HEAD
      /**
       * Creates a new JoystickController instance
       * @param port the port the joystick is connected to
       */
+=======
+>>>>>>> 3eee1c0e885e0cd3afe542e4e070a6e74a9deb18
     public JoystickController(int port)
     {
         super(port);

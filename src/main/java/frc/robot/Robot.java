@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.util.Hashtable;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -17,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot 
 {
 	private Command m_autonomousCommand;
+
+	public static Hashtable state = new Hashtable< String, Object >();
 
 	private RobotContainer m_robotContainer;
 
@@ -88,20 +92,25 @@ public class Robot extends TimedRobot
 		{
 			m_autonomousCommand.cancel();
 		}
+
+		RobotContainer.driveTrain.coast();
 	}
 
-  /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {}
+  	/** This function is called periodically during operator control. */
+  	@Override
+  	public void teleopPeriodic() 
+  	{
+		RobotContainer.getRobotState();
+  	}
+	
+	@Override
+	public void testInit() 
+	{
+		// Cancels all running commands at the start of test mode.
+		CommandScheduler.getInstance().cancelAll();
+	}
 
-  @Override
-  public void testInit() 
-  {
-    // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
-  }
-
-  /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {}
+	/** This function is called periodically during test mode. */
+	@Override
+	public void testPeriodic() {}
 }

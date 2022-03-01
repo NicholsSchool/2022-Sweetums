@@ -17,8 +17,8 @@ public class Drive extends CommandBase
     public void execute() 
     {
         RobotContainer.driveTrain.move(
-            RobotContainer.c0.getLeftY(), 
-            RobotContainer.c0.getRightY()
+            -RobotContainer.j0.getY(), 
+            -RobotContainer.j1.getY()
         );
     }
 

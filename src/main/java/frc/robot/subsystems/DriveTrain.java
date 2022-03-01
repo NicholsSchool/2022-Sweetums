@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -8,46 +9,64 @@ import frc.robot.RobotMap;
 
 public class DriveTrain extends SubsystemBase
 {
-    private WPI_TalonFX fRDrive;
-    private WPI_TalonFX fLDrive;
-    private WPI_TalonFX bRDrive;
-    private WPI_TalonFX bLDrive;
+    private WPI_TalonFX rFDrive;
+    private WPI_TalonFX lFDrive;
+    private WPI_TalonFX rBDrive;
+    private WPI_TalonFX lBDrive;
 
     private DifferentialDrive diffDrive;
 
     public DriveTrain() 
     {
-        fRDrive = new WPI_TalonFX( RobotMap.FRONT_RIGHT_DRIVE_ID );
-        fLDrive = new WPI_TalonFX( RobotMap.FRONT_LEFT_DRIVE_ID );
-        bRDrive = new WPI_TalonFX( RobotMap.BACK_RIGHT_DRIVE_ID );
-        bLDrive = new WPI_TalonFX( RobotMap.BACK_LEFT_DRIVE_ID );
+        rFDrive = new WPI_TalonFX( RobotMap.RIGHT_FRONT_DRIVE_ID );
+        rBDrive = new WPI_TalonFX( RobotMap.RIGHT_BACK_DRIVE_ID );
+        lFDrive = new WPI_TalonFX( RobotMap.LEFT_FRONT_DRIVE_ID );
+        lBDrive = new WPI_TalonFX( RobotMap.LEFT_BACK_DRIVE_ID );
 
-        fRDrive.configFactoryDefault();
-        fLDrive.configFactoryDefault();
-        bRDrive.configFactoryDefault();
-        bLDrive.configFactoryDefault();
+        rFDrive.configFactoryDefault();
+        rBDrive.configFactoryDefault();
+        lFDrive.configFactoryDefault();
+        lBDrive.configFactoryDefault();
 
-        diffDrive = new DifferentialDrive( fLDrive, fRDrive );
+        diffDrive = new DifferentialDrive( lFDrive, rFDrive );
 
-        bRDrive.follow( fRDrive );
-        bLDrive.follow( fLDrive );
+        rBDrive.follow( rFDrive );
+        lBDrive.follow( lFDrive );
 
-        fRDrive.setInverted( false );
-        fLDrive.setInverted( false );
-        bRDrive.setInverted( false );
-        bLDrive.setInverted( false );
+        rFDrive.setInverted( true );
+        rBDrive.setInverted( true );
+        lFDrive.setInverted( false );
+        lBDrive.setInverted( false );
+
+        brake();
     }
 
     public void move( double leftSpeed, double rightSpeed ) 
     {
-        diffDrive.tankDrive(leftSpeed, rightSpeed);
+        diffDrive.tankDrive( leftSpeed, rightSpeed );
     }
 
     public void stop() 
     {
-        fRDrive.stopMotor();
-        fLDrive.stopMotor();
-        bRDrive.stopMotor();
-        bLDrive.stopMotor();
+        rFDrive.stopMotor();
+        rBDrive.stopMotor();
+        lFDrive.stopMotor();
+        lBDrive.stopMotor();
+    }
+
+    public void brake() 
+    {
+        rFDrive.setNeutralMode( NeutralMode.Brake );
+        rBDrive.setNeutralMode( NeutralMode.Brake );
+        lFDrive.setNeutralMode( NeutralMode.Brake );
+        lBDrive.setNeutralMode( NeutralMode.Brake );
+    }
+
+    public void coast() 
+    {
+        rFDrive.setNeutralMode( NeutralMode.Coast );
+        rBDrive.setNeutralMode( NeutralMode.Coast );
+        lFDrive.setNeutralMode( NeutralMode.Coast );
+        lBDrive.setNeutralMode( NeutralMode.Coast );
     }
 }
