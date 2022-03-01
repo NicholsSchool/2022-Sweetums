@@ -26,8 +26,8 @@ public final class Constants
 
     // Shooter Vs
     public static final double HIGH_GOAL_VELOCITY = 16400.0;
-    public static final double LOW_GOAL_VELOCITY = 7200.0;
-    public static final double THROW_AWAY_VELOCITY = 1000.0;
+    public static final double LOW_GOAL_VELOCITY = 7000.0;
+    public static final double THROW_AWAY_VELOCITY = 12000.0;
 
     // Intake PID Control Loop Constants
     public static final double INTAKE_P = 0.1;
