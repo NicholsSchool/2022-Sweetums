@@ -26,6 +26,7 @@ public class RobotContainer
 	public static JoystickController j0;
 	public static JoystickController j1;
 	public static XboxController c2;
+	public static JoystickController j3;
 
 	// Compressor
 	// Compressor compressor;
@@ -47,6 +48,7 @@ public class RobotContainer
     	j0 = new JoystickController( 0 );
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
+		j3 = new JoystickController( 3 );
 
 		// compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
@@ -71,19 +73,26 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
+		intake.setDefaultCommand( new LiftArm() );
+
 		// intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
 
 		// Driver
         // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.DOWN ) ) );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( Vars.up ) ) );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( Constants.UP ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.y.whileHeld( new ThrowAway() );
+
+		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.UP ) ) );
+		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.DOWN ) ) );
+		c2.a.whileHeld( new TakeOut() );
+		c2.b.whileHeld( new TakeIn() );
 	}
 
 	public static void getRobotState() 

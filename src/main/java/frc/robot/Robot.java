@@ -52,16 +52,8 @@ public class Robot extends TimedRobot
     	// block in order for anything in the Command-based framework to work.
     	CommandScheduler.getInstance().run();
 
-		// If Button is pressed, Zeros Intake's Encoder
-		if( RobotContainer.intake.isButtonPressed() )
-		{
-			if( !Vars.foundUp )
-			{
-				Vars.up = -Vars.posAtStart;
-				Vars.foundUp = true;
-			}
-			RobotContainer.intake.resetEncoder();
-		}
+		Robot.state.put( "Arm Pos.", RobotContainer.intake.getPosition() );
+		Robot.state.put( "j3Y", -RobotContainer.j3.getY() );
 	}
 
 	/** 

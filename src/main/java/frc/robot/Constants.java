@@ -14,7 +14,7 @@ package frc.robot;
  */
 public final class Constants 
 {
-    // 
+    // Roller Power
     public static final double ROLLER_SPEED = 0.2;
 
     // Shooter Power
@@ -44,4 +44,8 @@ public final class Constants
     public static final double SHOOTER_I = 0;
     public static final double SHOOTER_D = 0;
     public static final double SHOOTER_RAMP_TIME = 1;
+
+    // Intake Constants 
+    public static final double UP = 50.0;
+    public static final double DOWN = 0.0;
 }

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.Vars;
 
 public class Intake extends SubsystemBase
 {
@@ -34,8 +33,6 @@ public class Intake extends SubsystemBase
         // Encoder
         encoder = intake.getEncoder();
 
-        Vars.posAtStart = getPosition();
-
         // PID Controller
         pidController = intake.getPIDController();
 
@@ -51,6 +48,11 @@ public class Intake extends SubsystemBase
 
         // Button
         button = new DigitalInput( RobotMap.BUTTON_CHANNEL);
+    }
+
+    public void move( double speed ) 
+    {
+        intake.set( speed );
     }
 
     public void stop() 
