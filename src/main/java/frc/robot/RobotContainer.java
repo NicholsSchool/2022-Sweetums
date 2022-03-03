@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import frc.robot.autonomous.AutoDrive;
+import frc.robot.autonomous.AutoShoot;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.util.*;
@@ -110,6 +112,6 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return null;
+		return new AutoShoot().andThen( new AutoDrive() );
 	}
 }
