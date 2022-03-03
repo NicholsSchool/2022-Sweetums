@@ -32,6 +32,7 @@ public class RobotContainer
 	// Compressor compressor;
 
 	// Subsystems
+	public static Button button;
 	public static DriveTrain driveTrain;
 	public static Indexer indexer;
 	public static Intake intake;
@@ -50,14 +51,23 @@ public class RobotContainer
     	c2 = new XboxController( 2 );
 		j3 = new JoystickController( 3 );
 
+		button = new Button();
+
 		// compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
     	driveTrain = new DriveTrain();
+
 		indexer = new Indexer();
+
 		intake = new Intake();
+		intake.resetEncoder();
+
 		roller = new Roller();
+
 		// shifter = new Shifter();
+
 		shooter = new Shooter();
+
 		// slider = new Slider();
 
     	configureButtonBindings();
@@ -71,6 +81,8 @@ public class RobotContainer
 	 */
 	private void configureButtonBindings() 
 	{
+		button.setDefaultCommand( new CheckButton() );
+
 		driveTrain.setDefaultCommand( new Drive() );
 
 		intake.setDefaultCommand( new LiftArm() );
@@ -80,17 +92,17 @@ public class RobotContainer
 		// Driver
         // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.DOWN ) ) );
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( Constants.UP ) ) );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( intake.getUp() ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.y.whileHeld( new ThrowAway() );
 
-		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.UP ) ) );
-		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.DOWN ) ) );
+		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getUp() ) ) );
+		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 		c2.a.whileHeld( new TakeOut() );
 		c2.b.whileHeld( new TakeIn() );
 	}
@@ -98,10 +110,7 @@ public class RobotContainer
 	public static void getRobotState() 
 	{
 		Robot.state.put( "Shooter Velocity", RobotContainer.shooter.getVelocity() );
-		Robot.state.put( "Intake Switch", intake.isButtonPressed() );
-		// Robot.state.put( "Ball", '!' );
 		// Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
-		// // Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
 		// Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
 		System.out.println( Robot.state );
 	}

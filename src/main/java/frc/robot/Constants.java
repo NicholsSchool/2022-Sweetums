@@ -31,7 +31,7 @@ public final class Constants
 
     // Intake PID Control Loop Constants
     public static final double INTAKE_P = 0.1;
-    public static final double INTAKE_I = 1e-4;
+    public static final double INTAKE_I = 0;
     public static final double INTAKE_D = 0.1;
     public static final double INTAKE_Iz = 0;
     public static final double INTAKE_FF = 0;
@@ -44,8 +44,4 @@ public final class Constants
     public static final double SHOOTER_I = 0;
     public static final double SHOOTER_D = 0;
     public static final double SHOOTER_RAMP_TIME = 1;
-
-    // Intake Constants 
-    public static final double UP = 50.0;
-    public static final double DOWN = 0.0;
 }
