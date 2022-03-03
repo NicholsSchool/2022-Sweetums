@@ -15,7 +15,7 @@ package frc.robot;
 public final class Constants 
 {
     // Roller Power
-    public static final double ROLLER_SPEED = 0.2;
+    public static final double ROLLER_SPEED = 0.75;
 
     // Shooter Power
     public static final double SHOOTER_SPEED = 1.0;
@@ -35,8 +35,8 @@ public final class Constants
     public static final double INTAKE_D = 0.1;
     public static final double INTAKE_Iz = 0;
     public static final double INTAKE_FF = 0;
-    public static final double INTAKE_MAX_OUTPUT = 0.25;
-    public static final double INTAKE_MIN_OUTPUT = -0.25;
+    public static final double INTAKE_MAX_OUTPUT = 0.50;
+    public static final double INTAKE_MIN_OUTPUT = -0.60;
 
     // Shooter PID Control Loop Constants
     public static final double SHOOTER_F = 0.057;

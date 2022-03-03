@@ -9,8 +9,6 @@ public class Button extends SubsystemBase
 {
     private DigitalInput button;
 
-    private boolean firstTime = false;
-
     public Button() 
     {
         button = new DigitalInput( RobotMap.BUTTON_CHANNEL );
@@ -18,12 +16,9 @@ public class Button extends SubsystemBase
 
     public boolean get() 
     {
-        if( button.get() && !firstTime )
-        {
-            firstTime = true;
-            RobotContainer.intake.setUp( RobotContainer.intake.getPosition() );
-            RobotContainer.intake.resetEncoder();
-        }
+        if( button.get() )
+            RobotContainer.intake.setDown( RobotContainer.intake.getPosition() );
+
         return button.get();
     }
 }

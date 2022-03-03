@@ -85,24 +85,22 @@ public class RobotContainer
 
 		driveTrain.setDefaultCommand( new Drive() );
 
-		intake.setDefaultCommand( new LiftArm() );
-
 		// intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
 
 		// Driver
         // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getDown() ) ) );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( intake.getUp() ) ) );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.y.whileHeld( new ThrowAway() );
 
-		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getUp() ) ) );
-		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
+		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
+		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getDown() ) ) );
 		c2.a.whileHeld( new TakeOut() );
 		c2.b.whileHeld( new TakeIn() );
 	}
