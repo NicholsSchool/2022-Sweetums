@@ -4,8 +4,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -16,8 +14,8 @@ public class Climber extends SubsystemBase
 
     public Climber() 
     {
-        rightClimb = new CANSparkMax( RobotMap.RIGHT_CLIBER_ID, MotorType.kBrushless );
-        leftClimb = new CANSparkMax( RobotMap.LEFT_INTAKE_ID, MotorType.kBrushless );
+        rightClimb = new CANSparkMax( RobotMap.RIGHT_CLIMBER_ID, MotorType.kBrushless );
+        leftClimb = new CANSparkMax( RobotMap.LEFT_CLIMBER_ID, MotorType.kBrushless );
 
         rightClimb.restoreFactoryDefaults();
         leftClimb.restoreFactoryDefaults();

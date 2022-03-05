@@ -11,11 +11,12 @@ public class RobotMap
 
     public static final int INDEXER_ID = 42;
 
-    public static final int RIGHT_CLIBER_ID = 47;
-    public static final int LEFT_CLIBER_ID = 48;
+    public static final int RIGHT_CLIMBER_ID = 47;
+    public static final int LEFT_CLIMBER_ID = 48;
 
-    public static final int RIGHT_INTAKE_ID = 45;
-    public static final int LEFT_INTAKE_ID = 44;
+    public static final int INTAKE_ID = 45;
+
+    public static final int ROLLER_ID = 44;
 
     public static final int PCM_CAN_ID = 0;
 
