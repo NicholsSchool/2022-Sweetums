@@ -13,31 +13,36 @@ import frc.robot.RobotContainer;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PIDDrive extends PIDCommand {
+
   /** Creates a new PIDDrive. */
   public PIDDrive( double inches ) {
     super(
-        // The controller that the command will use
+
         new PIDController(0.0001, 0, 0),
-        // This should return the measurement
+
         () -> RobotContainer.driveTrain.getRFEncoderValue(),
-        // This should return the setpoint (can also be a constant)
+
         () -> inches / Constants.INCHES_PER_TICK,
-        // This uses the output
+        
         output -> {
-          
+
           output += Math.copySign(Constants.DRIVE_TRAIN_DRIVE_kF, output); // Feed forward
           RobotContainer.driveTrain.move(output, output * Constants.DRIVE_TRAIN_EQUALIZIER);
-          // Use the output here
+
         });
-    // Use addRequirements() here to declare subsystem dependencies.
-    // Configure additional PID options by calling `getController` here.
+
     addRequirements(RobotContainer.driveTrain);
     getController().setTolerance(Constants.AUTO_DRIVE_TOLERANCE);
   }
 
-  // Returns true when the command should end.
+  @Override
+  public void initialize() {
+      super.initialize();
+      RobotContainer.driveTrain.resetEncoders();
+  }
+
   @Override
   public boolean isFinished() {
-    return false;
+    return getController().atSetpoint();
   }
 }
