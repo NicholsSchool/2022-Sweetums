@@ -112,6 +112,6 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new AutoShoot().andThen( new AutoDrive() );
+		return new AutoDrive().andThen( new AutoShoot().withTimeout( 5 ) ).andThen( new AutoDrive() );
 	}
 }

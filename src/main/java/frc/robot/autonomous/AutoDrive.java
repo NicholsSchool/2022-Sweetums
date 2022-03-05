@@ -16,7 +16,7 @@ public class AutoDrive extends CommandBase
 {
   private long startTime;
   //DriveTrain.rFDrive.
-  public AutoDrive() 
+  public AutoDrive() //dist, spd
   {
       // Use addRequirements() here to declare subsystem dependencies.
       addRequirements( RobotContainer.driveTrain );
@@ -33,11 +33,9 @@ public class AutoDrive extends CommandBase
   @Override
   public void execute() 
   {
-
-    // Stops shooter and starts reversing
     if( ( System.currentTimeMillis() / 1000 ) - startTime >  Constants.AUTO_SHOOT_TIME )
     {
-      RobotContainer.driveTrain.move( -Constants.AUTO_DRIVE_SPEED, -Constants.AUTO_DRIVE_SPEED );
+      RobotContainer.driveTrain.move( Constants.AUTO_DRIVE_SPEED, Constants.AUTO_DRIVE_SPEED );
     }
     
     // Stops reversing

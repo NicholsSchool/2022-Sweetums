@@ -9,13 +9,12 @@ package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoShoot extends CommandBase
 {
-  private double startTime;
-  //DriveTrain.rFDrive.
   public AutoShoot() 
   {
       // Use addRequirements() here to declare subsystem dependencies.
@@ -26,29 +25,22 @@ public class AutoShoot extends CommandBase
   @Override
   public void initialize() 
   {
-    startTime = System.currentTimeMillis() / 1000; // startTime == seconds
+    RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
   }
     
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
+    if( RobotContainer.shooter.getVelocity() < Constants.LOW_GOAL_VELOCITY )
+      RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
+    else
     RobotContainer.indexer.move( Constants.INDEXER_SPEED );
-    // Shoots a ball
-    RobotContainer.shooter.move( Constants.LOW_GOAL_VELOCITY );
-
-    // Stops shooter and starts reversing
-    if( ( System.currentTimeMillis() / 1000 ) - startTime >  Constants.AUTO_SHOOT_TIME )
-    {
-      RobotContainer.shooter.stop();
-      RobotContainer.indexer.stop();
-    }
-
   }
     
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
+  public void end( boolean interrupted ) 
   {
     RobotContainer.shooter.stop();
     RobotContainer.indexer.stop();
