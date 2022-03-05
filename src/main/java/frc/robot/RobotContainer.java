@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 // import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -29,7 +30,7 @@ public class RobotContainer
 	public static JoystickController j3;
 
 	// Compressor
-	// Compressor compressor;
+	Compressor compressor;
 
 	// Subsystems
 	public static Button button;
@@ -53,7 +54,7 @@ public class RobotContainer
 
 		button = new Button();
 
-		// compressor = new Compressor( PneumaticsModuleType.CTREPCM );
+		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
     	driveTrain = new DriveTrain();
 
@@ -85,12 +86,12 @@ public class RobotContainer
 
 		driveTrain.setDefaultCommand( new Drive() );
 
-		// intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
-
 		// Driver
         // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getDown() ) ) );
+		j0.b1.whileHeld( new TakeIn() );
+
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
 		j1.b1.whileHeld( new TakeIn() );
 		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 
@@ -100,7 +101,7 @@ public class RobotContainer
 		c2.y.whileHeld( new ThrowAway() );
 
 		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
-		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getDown() ) ) );
+		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
 		c2.a.whileHeld( new TakeOut() );
 		c2.b.whileHeld( new TakeIn() );
 	}
