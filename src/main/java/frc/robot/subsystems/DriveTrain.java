@@ -69,4 +69,15 @@ public class DriveTrain extends SubsystemBase
         lFDrive.setNeutralMode( NeutralMode.Coast );
         lBDrive.setNeutralMode( NeutralMode.Coast );
     }
+
+    public double getEncoderValue()
+    {
+        return rFDrive.getSelectedSensorPosition();
+    }
+
+    public void resetEncoder()
+    {
+        rFDrive.setSelectedSensorPosition(0);
+    }
+
 }

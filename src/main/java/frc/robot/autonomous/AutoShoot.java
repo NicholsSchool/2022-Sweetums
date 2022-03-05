@@ -8,57 +8,68 @@
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+//import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveTrain;
+//import frc.robot.subsystems.DriveTrain;
 
 public class AutoShoot extends CommandBase
 {
   private double startTime;
-  //DriveTrain.rFDrive.
-  public AutoShoot() 
+  private double time;
+  private double speed;
+  private double indexer;
+
+  /**
+   * @param sec time spent reving the shooter and shooting
+   * @param spd speed of the shooter
+   * @param indexSpeed speed of the indexer
+   */
+  public AutoShoot( double sec, double spd, double indexSpeed ) 
   {
       // Use addRequirements() here to declare subsystem dependencies.
       addRequirements( RobotContainer.shooter, RobotContainer.indexer );
+      time = sec;
+      speed = spd;
+      indexer = indexSpeed;
   }
     
   // Called when the command is initially scheduled.
   @Override
   public void initialize() 
   {
-    startTime = System.currentTimeMillis() / 1000; // startTime == seconds
+    startTime = System.currentTimeMillis();
   }
     
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-    RobotContainer.indexer.move( Constants.INDEXER_SPEED );
-    // Shoots a ball
-    RobotContainer.shooter.move( Constants.LOW_GOAL_VELOCITY );
-
-    // Stops shooter and starts reversing
-    if( ( System.currentTimeMillis() / 1000 ) - startTime >  Constants.AUTO_SHOOT_TIME )
+    
+    if( time >= System.currentTimeMillis() - startTime )
     {
-      RobotContainer.shooter.stop();
-      RobotContainer.indexer.stop();
+      RobotContainer.shooter.move( speed );
+
+      if( RobotContainer.shooter.getVelocity() >= speed * ( 9 / 10 ) )
+        RobotContainer.indexer.move( indexer );
     }
 
   }
     
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
+  public void end( boolean interrupted ) 
   {
+
     RobotContainer.shooter.stop();
     RobotContainer.indexer.stop();
+
   }
     
   // Returns true when the command should end.
   @Override
   public boolean isFinished() 
   {
-    return false;
+    return time <= System.currentTimeMillis() - startTime;
   }
 
 }

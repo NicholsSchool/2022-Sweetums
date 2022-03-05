@@ -112,6 +112,6 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new AutoShoot().andThen( new AutoDrive() );
+		return new AutoShoot( Constants.AUTO_SHOOT_TIME, Constants.LOW_GOAL_VELOCITY, Constants.INDEXER_SPEED ).andThen( new AutoDrive( Constants.AUTO_DISTANCE, Constants.AUTO_DRIVE_SPEED ) );
 	}
 }

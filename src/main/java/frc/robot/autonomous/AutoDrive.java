@@ -8,25 +8,33 @@
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+//import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveTrain;
+//import frc.robot.subsystems.DriveTrain;
 
 public class AutoDrive extends CommandBase
 {
-  private long startTime;
-  //DriveTrain.rFDrive.
-  public AutoDrive() 
+  
+  private double distance;
+  private double speed;
+
+  /**
+   * @param dst desired travel distance
+   * @param spd speed to travel at (since going in reverse, use negative speed)
+   */
+  public AutoDrive( double dst, double spd ) 
   {
       // Use addRequirements() here to declare subsystem dependencies.
       addRequirements( RobotContainer.driveTrain );
+      distance = dst;
+      speed = spd;
   }
     
   // Called when the command is initially scheduled.
   @Override
   public void initialize() 
   {
-    startTime = System.currentTimeMillis() / 1000; // startTime == seconds
+    RobotContainer.driveTrain.resetEncoder();
   }
     
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,23 +42,14 @@ public class AutoDrive extends CommandBase
   public void execute() 
   {
 
-    // Stops shooter and starts reversing
-    if( ( System.currentTimeMillis() / 1000 ) - startTime >  Constants.AUTO_SHOOT_TIME )
-    {
-      RobotContainer.driveTrain.move( -Constants.AUTO_DRIVE_SPEED, -Constants.AUTO_DRIVE_SPEED );
-    }
-    
-    // Stops reversing
-    if( ( System.currentTimeMillis() / 1000 ) - startTime > ( Constants.AUTO_DRIVE_TIME ) )
-    {
-      RobotContainer.driveTrain.stop();
-    }
+    if( distance >= Math.abs( RobotContainer.driveTrain.getEncoderValue() ) )
+      RobotContainer.driveTrain.move( speed, speed );
 
   }
     
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
+  public void end( boolean interrupted ) 
   {
     RobotContainer.driveTrain.stop();
   }
@@ -59,7 +58,7 @@ public class AutoDrive extends CommandBase
   @Override
   public boolean isFinished() 
   {
-    return false;
+    return distance <= Math.abs( RobotContainer.driveTrain.getEncoderValue() );
   }
 
 }

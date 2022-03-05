@@ -46,8 +46,7 @@ public final class Constants
     public static final double UP = -50;
 
     // Autonomous Timings & Velocities
-    public static final double AUTO_SHOOT_TIME = 2.5; // Time spent shooting
-    public static final double AUTO_DRIVE_TIME = 2.5; // Time spent moving
-    public static final double AUTO_SHOOTER_SPEED = HIGH_GOAL_VELOCITY;
+    public static final double AUTO_SHOOT_TIME = 2.5;
     public static final double AUTO_DRIVE_SPEED = 0.2;
+    public static final double AUTO_DISTANCE = 100.0;
 }
