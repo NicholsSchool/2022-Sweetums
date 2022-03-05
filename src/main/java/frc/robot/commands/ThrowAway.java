@@ -14,14 +14,14 @@ public class ThrowAway extends CommandBase
     @Override
     public void initialize() 
     {
-        RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
+        RobotContainer.shooter.move( Constants.THROW_AWAY_VELOCITY );
     }
 
     @Override
     public void execute()
     {
         if( RobotContainer.shooter.getVelocity() < Constants.THROW_AWAY_VELOCITY )
-            RobotContainer.shooter.move( Constants.SHOOTER_SPEED );
+            RobotContainer.shooter.move( Constants.THROW_AWAY_VELOCITY );
         else
             RobotContainer.indexer.move( Constants.INDEXER_SPEED );
     }

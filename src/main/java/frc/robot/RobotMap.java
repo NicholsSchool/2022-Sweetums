@@ -26,4 +26,5 @@ public class RobotMap
     public static final int SHIFTER_SOLENOID_CHANNEL = 0; // May be 1
 
     public static final int SLIDER_SOLENOID_CHANNEL = 1; // May be 0
+
 }
