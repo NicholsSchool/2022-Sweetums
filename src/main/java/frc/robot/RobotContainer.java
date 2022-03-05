@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 // import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer 
-{	
+{		
 	// Controllers 
 	public static JoystickController j0;
 	public static JoystickController j1;
@@ -29,34 +30,43 @@ public class RobotContainer
 	public static JoystickController j3;
 
 	// Compressor
-	// Compressor compressor;
+	Compressor compressor;
+
+	// Double Buttons
+	DoubleButton climbButton;
 
 	// Subsystems
-	public static Button button;
+	public static Climber climber;
 	public static DriveTrain driveTrain;
+	public static Hooks hooks;
 	public static Indexer indexer;
 	public static Intake intake;
 	public static Roller roller;
-	// public static Shifter shifter; 
+	public static Shifter shifter; 
 	public static Shooter shooter;
-	// public static Slider slider;
+	public static Slider slider;
 
   	/** 
 	 * The container for the robot. Contains subsystems, OI devices, and commands. 
 	 */
   	public RobotContainer() 
 	{
+		// Controllers
     	j0 = new JoystickController( 0 );
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
 		j3 = new JoystickController( 3 );
 
-		button = new Button();
-
-		// compressor = new Compressor( PneumaticsModuleType.CTREPCM );
+		// Compressor
+		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
-    	driveTrain = new DriveTrain();
+		// DoubleButton
+		climbButton = new DoubleButton( j1.b6, c2.a );
 
+		// Subsystems
+		climber = new Climber();
+    	driveTrain = new DriveTrain();
+		hooks = new Hooks();
 		indexer = new Indexer();
 
 		intake = new Intake();
@@ -67,8 +77,7 @@ public class RobotContainer
 		// shifter = new Shifter();
 
 		shooter = new Shooter();
-
-		// slider = new Slider();
+		slider = new Slider();
 
     	configureButtonBindings();
   	}
@@ -81,8 +90,6 @@ public class RobotContainer
 	 */
 	private void configureButtonBindings() 
 	{
-		button.setDefaultCommand( new CheckButton() );
-
 		driveTrain.setDefaultCommand( new Drive() );
 
 		// intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
@@ -97,12 +104,12 @@ public class RobotContainer
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
-		c2.y.whileHeld( new ThrowAway() );
+		c2.dpadDown.whileHeld( new ThrowAway() );
 
-		c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
-		c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getDown() ) ) );
-		c2.a.whileHeld( new TakeOut() );
-		c2.b.whileHeld( new TakeIn() );
+		// Climbing
+		climbButton.whileHeld( new Unfold() );
+		c2.b.whenPressed( new InstantCommand( () -> slider.toggle() ).andThen( new InstantCommand( () -> hooks.toggle() ) ) );
+		c2.y.whileHeld( new Climb() );
 	}
 
 	public static void getRobotState() 

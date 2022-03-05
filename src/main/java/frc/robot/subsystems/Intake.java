@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase
     public Intake()
     {
         // Intake
-        intake = new CANSparkMax( RobotMap.RIGHT_INTAKE_ID, MotorType.kBrushless );
+        intake = new CANSparkMax( RobotMap.INTAKE_ID, MotorType.kBrushless );
 
         intake.restoreFactoryDefaults();
 
@@ -76,17 +76,7 @@ public class Intake extends SubsystemBase
         if( position > 0 )
             pidController.setReference( position, CANSparkMax.ControlType.kPosition );
     }
-
-    public double getUp() 
-    {
-        return up;
-    }
-
-    public void setUp( double foundUp ) 
-    {
-        up = foundUp;
-    }
-
+    
     public double getDown() 
     {
         return down;

@@ -13,7 +13,7 @@ public class Roller extends SubsystemBase
 
     public Roller() 
     {
-        roller = new CANSparkMax( RobotMap.LEFT_INTAKE_ID, MotorType.kBrushless );
+        roller = new CANSparkMax( RobotMap.ROLLER_ID, MotorType.kBrushless );
 
         roller.restoreFactoryDefaults();
 

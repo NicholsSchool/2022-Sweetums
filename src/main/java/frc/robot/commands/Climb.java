@@ -1,14 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class CheckButton extends CommandBase 
+public class Climb extends CommandBase
 {
-    public CheckButton() 
+    public Climb() 
     {
-        addRequirements( RobotContainer.button );
+        addRequirements( RobotContainer.climber );
     }
 
     @Override
@@ -17,11 +17,14 @@ public class CheckButton extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.button.get();
+        RobotContainer.climber.move( Constants.CLIMBER_CLIMB_POWER );
     }
 
     @Override
-    public void end( boolean interrupted ) {}
+    public void end( boolean interrupted ) 
+    {
+        RobotContainer.climber.stop();
+    }
 
     @Override
     public boolean isFinished() 

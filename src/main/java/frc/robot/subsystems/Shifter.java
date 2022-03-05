@@ -15,8 +15,6 @@ public class Shifter extends SubsystemBase
     public Shifter()
     {
         shifter = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.SHIFTER_SOLENOID_CHANNEL );
-
-        shifter.set( true );
     }
 
     public boolean get() 
@@ -26,6 +24,6 @@ public class Shifter extends SubsystemBase
     
     public void toggle() 
     {
-        shifter.set( !shifter.get() );
+        shifter.toggle();
     }
 }
