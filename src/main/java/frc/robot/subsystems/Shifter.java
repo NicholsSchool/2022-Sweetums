@@ -24,6 +24,6 @@ public class Shifter extends SubsystemBase
     
     public void toggle() 
     {
-        shifter.set( !shifter.get() );
+        shifter.toggle();
     }
 }

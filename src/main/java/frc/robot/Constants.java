@@ -14,7 +14,11 @@ package frc.robot;
  */
 public final class Constants 
 {
-    // 
+    // Climber Power
+    public static final double BRING_IN_CLIMBER_POWER = 0.1; 
+    public static final double EXTEND_CLIMBER_POWER = 0.2; 
+
+    // Roller Power
     public static final double ROLLER_SPEED = 0.2;
 
     // Shooter Power

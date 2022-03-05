@@ -15,6 +15,8 @@ public class Slider extends SubsystemBase
     public Slider()
     {
         slider = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.SLIDER_SOLENOID_CHANNEL );
+
+        slider.set( true );
     }
 
     public boolean get() 
@@ -22,12 +24,12 @@ public class Slider extends SubsystemBase
         return slider.get();
     }
 
-    public void releaseSlider()
+    public void release()
     {
         slider.set( false );
     }
 
-    public void returnOriginalState()
+    public void returnToOriginalState()
     {
         slider.set( true );
     }
