@@ -52,7 +52,7 @@ public final class Constants
     public static final double AUTO_DRIVE_SPEED = 0.2;
 
 
-    public static final double DRIVE_TICKS_PER_REV = 2048;
+    public static final double DRIVE_TICKS_PER_REV = 25957.83;
     public static final double DRIVE_WHEEL_DIAMETER = 3.875; // inches
     public static final double INCHES_PER_TICK = Math.PI * DRIVE_WHEEL_DIAMETER / DRIVE_TICKS_PER_REV;
     public static final double AUTO_DRIVE_TOLERANCE = 3 / INCHES_PER_TICK;

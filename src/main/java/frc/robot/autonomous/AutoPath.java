@@ -6,7 +6,7 @@ public class AutoPath {
 
     public static CommandBase getCommand()
     {
-        return new BBDrive( 200, .5 );
+        return new BBDrive( 36, .5 ).withTimeout( 5 ).andThen( new BBDrive( -36, 0.5).withTimeout( 5 ) );
     
     }
     

@@ -52,7 +52,7 @@ public class RobotContainer
     	c2 = new XboxController( 2 );
 		j3 = new JoystickController( 3 );
 
-		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
+		//compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
     	driveTrain = new DriveTrain();
 		indexer = new Indexer();
@@ -102,6 +102,7 @@ public class RobotContainer
 		// Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
 		// // Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
 		// Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
+		//Robot.state.put( "Encoder Value" , RobotContainer.driveTrain.getRFEncoderValue() );
 		System.out.println( Robot.state );
 	}
 

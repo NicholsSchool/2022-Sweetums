@@ -14,12 +14,12 @@ public class BBDrive extends CommandBase
       desiredDistance = distance / Constants.INCHES_PER_TICK; 
       speed = spd; 
       addRequirements( RobotContainer.driveTrain );
+      RobotContainer.driveTrain.resetEncoders();
     }
 
     @Override
     public void initialize() 
     {
-        RobotContainer.driveTrain.resetEncoders();
     }
 
     @Override
