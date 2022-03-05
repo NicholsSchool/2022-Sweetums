@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer 
-{	
+{		
 	// Controllers 
 	public static JoystickController j0;
 	public static JoystickController j1;
@@ -96,14 +96,10 @@ public class RobotContainer
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.dpadDown.whileHeld( new ThrowAway() );
 
-		// Both
-		climbButton.whenPressed( new InstantCommand( () -> addClimberBindings() ) );
-		climbButton.whileHeld( new BringInClimb() );
-	}
-	private void addClimberBindings() 
-	{
-		c2.b.whenPressed( new InstantCommand( () -> slider.release() ).andThen( new InstantCommand( () -> hooks.toggle() ) ) );
-		c2.y.whileHeld( new ExtendClimb() );
+		// Climbing
+		climbButton.whileHeld( new Unfold() );
+		c2.b.whenPressed( new InstantCommand( () -> slider.toggle() ).andThen( new InstantCommand( () -> hooks.toggle() ) ) );
+		c2.y.whileHeld( new Climb() );
 	}
 
 	public static void getRobotState() 

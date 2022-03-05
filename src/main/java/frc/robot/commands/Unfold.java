@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class ExtendClimb extends CommandBase
+public class Unfold extends CommandBase
 {
-    public ExtendClimb() 
+    public Unfold() 
     {
         addRequirements( RobotContainer.climber );
     }
@@ -17,11 +17,14 @@ public class ExtendClimb extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.climber.move( Constants.EXTEND_CLIMBER_POWER );
+        RobotContainer.climber.move( Constants.CLIMBER_UNFOLD_POWER );
     }
 
     @Override
-    public void end( boolean interrupted ) {}
+    public void end( boolean interrupted ) 
+    {
+        RobotContainer.climber.stop();
+    }
 
     @Override
     public boolean isFinished() 

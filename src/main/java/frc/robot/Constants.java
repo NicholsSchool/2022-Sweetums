@@ -14,9 +14,28 @@ package frc.robot;
  */
 public final class Constants 
 {
-    // Climber Power
-    public static final double BRING_IN_CLIMBER_POWER = 0.1; 
-    public static final double EXTEND_CLIMBER_POWER = 0.2; 
+    // Unfold Power
+    public static final double CLIMBER_UNFOLD_POWER = -0.1; 
+
+    // Climb Power
+    public static final double CLIMBER_CLIMB_POWER = 1.0; 
+
+    // Climber PID
+    public static final double RIGHT_CLIMB_P = 0.1;
+    public static final double RIGHT_CLIMB_I = 1e-4;
+    public static final double RIGHT_CLIMB_D = 0.1;
+    public static final double RIGHT_CLIMB_Iz = 0;
+    public static final double RIGHT_CLIMB_FF = 0;
+    public static final double RIGHT_CLIMB_MAX_OUTPUT = 0.5;
+    public static final double RIGHT_CLIMB_MIN_OUTPUT = -0.5;
+
+    public static final double LEFT_CLIMB_P = 0.1;
+    public static final double LEFT_CLIMB_I = 1e-4;
+    public static final double LEFT_CLIMB_D = 0.1;
+    public static final double LEFT_CLIMB_Iz = 0;
+    public static final double LEFT_CLIMB_FF = 0;
+    public static final double LEFT_CLIMB_MAX_OUTPUT = 0.05;
+    public static final double LEFT_CLIMB_MIN_OUTPUT = -0.05;
 
     // Roller Power
     public static final double ROLLER_SPEED = 0.2;

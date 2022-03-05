@@ -12,6 +12,8 @@ public class Hooks extends SubsystemBase
     public Hooks() 
     {
         hooks = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.HOOKS_SOLENOID_CHANNEL );
+
+        hooks.set( true );
     }
 
     public void toggle() 
