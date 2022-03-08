@@ -16,7 +16,7 @@ public class LiftArm extends CommandBase
     @Override
     public void execute()
     {
-        RobotContainer.intake.move( RobotContainer.j3.getY() );;
+        // RobotContainer.intake.move( RobotContainer.j3.getY() );;
     }
 
     @Override

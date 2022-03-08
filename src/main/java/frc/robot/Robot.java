@@ -53,7 +53,9 @@ public class Robot extends TimedRobot
     	CommandScheduler.getInstance().run();
 
 		Robot.state.put( "Arm Pos.", RobotContainer.intake.getPosition() );
-		Robot.state.put( "j3Y", -RobotContainer.j3.getY() );
+		// Robot.state.put( "j3Y", -RobotContainer.j3.getY() );
+		Robot.state.put( "LeftClimbV", RobotContainer.climber.getLeftClimberPosition() );
+		Robot.state.put( "RightClimbV", RobotContainer.climber.getRightClimberPosition() );
 	}
 
 	/** 

@@ -66,7 +66,7 @@ public class Climber extends SubsystemBase
         leftClimbPIDController.setOutputRange( Constants.LEFT_CLIMB_MIN_OUTPUT , Constants.LEFT_CLIMB_MAX_OUTPUT );
     }
 
-    public void move( double velocity ) 
+    public void climbAtVelocity( double velocity ) 
     {
         rightClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );
         leftClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );
@@ -76,5 +76,15 @@ public class Climber extends SubsystemBase
     {
         rightClimb.stopMotor();
         leftClimb.stopMotor();
+    }
+
+    public double getLeftClimberPosition() 
+    {
+        return leftClimbEncoder.getPosition();
+    }
+
+    public double getRightClimberPosition() 
+    {
+        return rightClimbEncoder.getPosition();
     }
 }

@@ -26,7 +26,6 @@ public class RobotContainer
 	public static JoystickController j0;
 	public static JoystickController j1;
 	public static XboxController c2;
-	public static JoystickController j3;
 
 	// Compressor
 	Compressor compressor;
@@ -54,7 +53,6 @@ public class RobotContainer
     	j0 = new JoystickController( 0 );
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
-		j3 = new JoystickController( 3 );
 
 		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		

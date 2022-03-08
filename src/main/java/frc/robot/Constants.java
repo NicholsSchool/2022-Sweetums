@@ -15,10 +15,10 @@ package frc.robot;
 public final class Constants 
 {
     // Unfold Power
-    public static final double CLIMBER_UNFOLD_VELOCITY = -10.0; 
+    public static final double CLIMBER_UNFOLD_VELOCITY = -600.0; 
 
     // Climb Power
-    public static final double CLIMBER_CLIMB_VELOCITY = 100.0; 
+    public static final double CLIMBER_CLIMB_VELOCITY = 3000.0; 
 
     // Climber PID
     public static final double RIGHT_CLIMB_P = 0.1;
