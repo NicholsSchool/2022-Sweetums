@@ -100,6 +100,7 @@ public class RobotContainer
 		// Robot.state.put( "Gear", shifter.get() == true? "High" : "Low" );
 		// // Robot.state.put( "Intake", piston.get() == true? "Extended" : "In" );
 		// Robot.state.put( "Slider", slider.get() == true? "In" : "Extended" );
+		Robot.state.put("Values", RobotContainer.ball);
 		System.out.println( Robot.state );
 	}
 

@@ -23,6 +23,7 @@ public class Robot extends TimedRobot
 	public static Hashtable state = new Hashtable< String, Object >();
 
 	private RobotContainer m_robotContainer;
+	private char ball;
 
   	/**
    	 * This function is run when the robot is first started up and should be used for any
@@ -101,7 +102,10 @@ public class Robot extends TimedRobot
   	public void teleopPeriodic() 
   	{
 		RobotContainer.getRobotState();
+		Robot.state.put("Ball Color: ", ball);
   	}
+
+	  	
 	
 	@Override
 	public void testInit() 
