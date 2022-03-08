@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-// import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.*;
@@ -57,7 +56,6 @@ public class RobotContainer
     	c2 = new XboxController( 2 );
 		j3 = new JoystickController( 3 );
 
-		// Compressor
 		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
 		// DoubleButton
@@ -74,7 +72,7 @@ public class RobotContainer
 
 		roller = new Roller();
 
-		// shifter = new Shifter();
+		shifter = new Shifter();
 
 		shooter = new Shooter();
 		slider = new Slider();
@@ -92,12 +90,12 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
-		// intakeSwitch.setDefaultCommand( new InstantCommand( () -> intakeSwitch.getPressed() ) );
-
 		// Driver
-        // j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
+        j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( intake.getDown() ) ) );
+		j0.b1.whileHeld( new TakeIn() );
+
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
 		j1.b1.whileHeld( new TakeIn() );
 		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 
@@ -110,6 +108,11 @@ public class RobotContainer
 		climbButton.whileHeld( new Unfold() );
 		c2.b.whenPressed( new InstantCommand( () -> slider.toggle() ).andThen( new InstantCommand( () -> hooks.toggle() ) ) );
 		c2.y.whileHeld( new Climb() );
+
+		// c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
+		// c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
+		// c2.a.whileHeld( new TakeOut() );
+		// c2.b.whileHeld( new TakeIn() );
 	}
 
 	public static void getRobotState() 

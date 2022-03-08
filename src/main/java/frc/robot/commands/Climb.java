@@ -17,7 +17,7 @@ public class Climb extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.climber.move( Constants.CLIMBER_CLIMB_POWER );
+        RobotContainer.climber.move( Constants.CLIMBER_CLIMB_VELOCITY );
     }
 
     @Override

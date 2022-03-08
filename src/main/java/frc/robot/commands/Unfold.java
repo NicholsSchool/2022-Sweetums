@@ -17,7 +17,7 @@ public class Unfold extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.climber.move( Constants.CLIMBER_UNFOLD_POWER );
+        RobotContainer.climber.move( Constants.CLIMBER_UNFOLD_VELOCITY );
     }
 
     @Override

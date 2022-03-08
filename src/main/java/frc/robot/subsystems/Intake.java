@@ -16,8 +16,6 @@ public class Intake extends SubsystemBase
     private RelativeEncoder encoder;
     private SparkMaxPIDController pidController;
 
-    private double down = 50.0;
-
     public Intake()
     {
         // Intake
@@ -73,17 +71,6 @@ public class Intake extends SubsystemBase
 
     public void goToPosition( double position ) 
     {
-        if( position > 0 )
-            pidController.setReference( position, CANSparkMax.ControlType.kPosition );
-    }
-    
-    public double getDown() 
-    {
-        return down;
-    } 
-
-    public void setDown( double foundDown ) 
-    {
-        down = foundDown;
+        pidController.setReference( position, CANSparkMax.ControlType.kPosition );
     }
 }
