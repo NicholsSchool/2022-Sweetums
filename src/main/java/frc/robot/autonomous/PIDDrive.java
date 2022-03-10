@@ -12,37 +12,43 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PIDDrive extends PIDCommand {
+public class PIDDrive extends PIDCommand 
+{
 
   /** Creates a new PIDDrive. */
-  public PIDDrive( double inches ) {
+  public PIDDrive( double inches ) 
+  {
     super(
 
-        new PIDController(0.0001, 0, 0),
+        new PIDController( 0.1, 0, 0 ),
 
         () -> RobotContainer.driveTrain.getRFEncoderValue(),
 
         () -> inches / Constants.INCHES_PER_TICK,
         
-        output -> {
+        output -> 
+        {
 
-          output += Math.copySign(Constants.DRIVE_TRAIN_DRIVE_kF, output); // Feed forward
-          RobotContainer.driveTrain.move(output, output * Constants.DRIVE_TRAIN_EQUALIZIER);
+          output += Math.copySign( Constants.DRIVE_TRAIN_DRIVE_kF, output );
+          RobotContainer.driveTrain.move( output, output );
 
-        });
+        }
+        );
 
-    addRequirements(RobotContainer.driveTrain);
-    getController().setTolerance(Constants.AUTO_DRIVE_TOLERANCE);
+    addRequirements( RobotContainer.driveTrain );
+    getController().setTolerance( Constants.AUTO_DRIVE_TOLERANCE );
   }
 
   @Override
-  public void initialize() {
+  public void initialize() 
+  {
       super.initialize();
       RobotContainer.driveTrain.resetEncoders();
   }
 
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() 
+  {
     return getController().atSetpoint();
   }
 }
