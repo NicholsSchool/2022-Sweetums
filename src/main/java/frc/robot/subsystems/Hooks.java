@@ -17,6 +17,11 @@ public class Hooks extends SubsystemBase
         hooks.set( Constants.HOOKS_IN );
     }
 
+    public boolean get() 
+    {
+        return hooks.get();
+    }
+
     public void toggle() 
     {
         hooks.toggle();

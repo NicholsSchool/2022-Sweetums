@@ -108,6 +108,11 @@ public class Climber extends SubsystemBase
         return rightClimberEncoder.getPosition();
     }
 
+    public boolean get() 
+    {
+        return climberSolenoid.get();
+    }
+
     public void toggleClimberSolenoid() 
     {
         climberSolenoid.toggle();

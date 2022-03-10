@@ -5,8 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import frc.robot.autonomous.ShootBalls;
+import frc.robot.autonomous.TimeDrive;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.util.*;
@@ -30,8 +33,11 @@ public class RobotContainer
 	// Compressor
 	Compressor compressor;
 
+	// Sensors
+	public static DigitalInput button;
+
 	// Subsystems
-	public static Button button;
+	// public static Button button;
 	public static Climber climber;
 	public static DriveTrain driveTrain;
 	public static Hooks hooks;
@@ -52,10 +58,14 @@ public class RobotContainer
 		j1 = new JoystickController( 1 );
     	c2 = new XboxController( 2 );
 
+		// Compressors
 		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
+		// Sensors
+		button = new DigitalInput( RobotMap.BUTTON_CHANNEL );
+
 		// Subsystems
-		button = new Button();
+		// button = new Button();
 		climber = new Climber();
     	driveTrain = new DriveTrain();
 		hooks = new Hooks();
@@ -84,16 +94,16 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
-		button.setDefaultCommand( new CheckButton() );
+		// button.setDefaultCommand( new CheckButton() );
 
 		// Driver
         j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
 		j0.b1.whileHeld( new TakeIn() );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.DOWN ) ) );
+		j1.b1.whenPressed( new GoDown() );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( Constants.UP ) ) );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( intake.getDown() - Constants.INTAKE_RANGE ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
@@ -128,6 +138,6 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return null;
+		return new ShootBalls( Constants.HIGH_GOAL_VELOCITY ).withTimeout( 4 ).andThen( new TimeDrive( 4, -Constants.DRIVE_TRAIN_POWER ).withTimeout( 3 ) );
 	}
 }

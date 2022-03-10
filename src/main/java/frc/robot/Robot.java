@@ -7,6 +7,7 @@ package frc.robot;
 import java.util.Hashtable;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -105,6 +106,10 @@ public class Robot extends TimedRobot
   	@Override
   	public void teleopPeriodic() 
   	{
+		SmartDashboard.putBoolean("Low Gear", RobotContainer.shifter.get() );
+		SmartDashboard.putBoolean("Hooks In", RobotContainer.hooks.get() );
+		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() );
+		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() );
 		RobotContainer.getRobotState();
   	}
 	

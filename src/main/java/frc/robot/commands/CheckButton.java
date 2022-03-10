@@ -5,27 +5,27 @@ import frc.robot.RobotContainer;
 
 public class CheckButton extends CommandBase 
 {
-    public CheckButton() 
-    {
-        addRequirements( RobotContainer.button );
-    }
+    // public CheckButton() 
+    // {
+    //     addRequirements( RobotContainer.button );
+    // }
 
-    @Override
-    public void initialize() {}
+    // @Override
+    // public void initialize() {}
 
-    @Override
-    public void execute() 
-    {
-        if( RobotContainer.button.isPressed() )
-            RobotContainer.intake.resetDown();
-    }
+    // @Override
+    // public void execute() 
+    // {
+    //     if( RobotContainer.button.isPressed() )
+    //         RobotContainer.intake.resetDown();
+    // }
 
-    @Override
-    public void end( boolean interrupted ) {}
+    // @Override
+    // public void end( boolean interrupted ) {}
 
-    @Override
-    public boolean isFinished() 
-    {
-        return false;
-    }   
+    // @Override
+    // public boolean isFinished() 
+    // {
+    //     return false;
+    // }   
 }

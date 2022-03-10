@@ -14,6 +14,13 @@ package frc.robot;
  */
 public final class Constants 
 {
+    // DriveTrain Power
+    public static final double DRIVE_TRAIN_POWER = 0.75;
+
+    // Gears 
+    public static final boolean HIGH_GEAR = false;
+    public static final boolean LOW_GEAR = !HIGH_GEAR;
+
     // Climb Power
     public static final double CLIMBER_CLIMB_VELOCITY = 3000.0; 
 
@@ -42,7 +49,7 @@ public final class Constants
     public static final double CLOSE_ENOUGH = 250.0;
 
     // Shooter Vs
-    public static final double HIGH_GOAL_VELOCITY = 16400.0;
+    public static final double HIGH_GOAL_VELOCITY = 13120.0;
     public static final double LOW_GOAL_VELOCITY = 7000.0;
     public static final double THROW_AWAY_VELOCITY = 12000.0;
     
@@ -50,12 +57,12 @@ public final class Constants
     public static final double INDEXER_SPEED = 1.0;
 
     // Intake Power
+    public static final double INTAKE_GO_DOWN_POWER = 0.5;
+
     public static final double INTAKE_TUCK_POWER = -0.1;
 
     // Intake Positions
     public static final double INTAKE_RANGE = 50.0;
-    public static final double DOWN = RobotContainer.intake == null? 50.0 : RobotContainer.intake.getDown(); // I am sorry
-    public static final double UP = DOWN - INTAKE_RANGE;
 
     // Intake PID Control Loop Constants
     public static final double INTAKE_P = 0.1;
