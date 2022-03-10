@@ -42,14 +42,14 @@ public final class Constants
     public static final double LEFT_CLIMB_MIN_OUTPUT = -0.5;
 
     // Roller Power
-    public static final double ROLLER_SPEED = 0.5;
+    public static final double ROLLER_SPEED = 0.9;
 
     // Shooter Power
     public static final double SHOOTER_SPEED = 1.0;
     public static final double CLOSE_ENOUGH = 250.0;
 
     // Shooter Vs
-    public static final double HIGH_GOAL_VELOCITY = 13120.0;
+    public static final double HIGH_GOAL_VELOCITY = 12300.0;
     public static final double LOW_GOAL_VELOCITY = 7000.0;
     public static final double THROW_AWAY_VELOCITY = 12000.0;
     
@@ -67,11 +67,11 @@ public final class Constants
     // Intake PID Control Loop Constants
     public static final double INTAKE_P = 0.1;
     public static final double INTAKE_I = 0;
-    public static final double INTAKE_D = 0.1;
+    public static final double INTAKE_D = 0.3; // 0.1
     public static final double INTAKE_Iz = 0;
     public static final double INTAKE_FF = 0;
-    public static final double INTAKE_MAX_OUTPUT = 0.50;
-    public static final double INTAKE_MIN_OUTPUT = -0.60;
+    public static final double INTAKE_MAX_OUTPUT = 0.33;
+    public static final double INTAKE_MIN_OUTPUT = -0.40;
 
     // Shooter PID Control Loop Constants
     public static final double SHOOTER_F = 0.057;
@@ -81,10 +81,10 @@ public final class Constants
     public static final double SHOOTER_RAMP_TIME = 1;
 
     // Default Solenoid Positions
-    public static final boolean CLIMB_LOCKED = false;
-    public static final boolean CLIMB_UNLOCKED = !CLIMB_LOCKED;
+    public static final boolean CLIMBER_LOCKED = false;
+    public static final boolean CLIMBER_UNLOCKED = !CLIMBER_LOCKED;
 
-    public static final boolean HOOKS_IN = false;
+    public static final boolean HOOKS_IN = true;
     public static final boolean HOOKS_OUT = !HOOKS_IN;
 
     public static final boolean SLIDER_LOCKED = false;

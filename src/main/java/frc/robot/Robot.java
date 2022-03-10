@@ -106,10 +106,10 @@ public class Robot extends TimedRobot
   	@Override
   	public void teleopPeriodic() 
   	{
-		SmartDashboard.putBoolean("Low Gear", RobotContainer.shifter.get() );
-		SmartDashboard.putBoolean("Hooks In", RobotContainer.hooks.get() );
-		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() );
-		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() );
+		SmartDashboard.putBoolean("Low Gear", RobotContainer.shifter.get() == Constants.LOW_GEAR );
+		SmartDashboard.putBoolean("Hooks In", RobotContainer.hooks.get() == Constants.HOOKS_IN );
+		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() == Constants.CLIMBER_UNLOCKED );
+		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.CLIMBER_UNLOCKED );
 		RobotContainer.getRobotState();
   	}
 	

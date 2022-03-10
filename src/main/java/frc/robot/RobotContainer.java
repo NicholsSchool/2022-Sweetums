@@ -101,9 +101,9 @@ public class RobotContainer
 
 		j0.b1.whileHeld( new TakeIn() );
 
-		j1.b1.whenPressed( new GoDown() );
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( intake.getDown() - Constants.INTAKE_RANGE ) ) );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
@@ -113,7 +113,7 @@ public class RobotContainer
 		// Climbing
 		c2.a.whenPressed( new InstantCommand( () -> climber.toggleClimberSolenoid() ) );
 		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
-		c2.y.whenPressed( new InstantCommand( () -> slider.unlockSliderSolenoid() ) );
+		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
 		c2.x.toggleWhenPressed( new TuckIntake() );
 		c2.start.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new Climb() ) );
 

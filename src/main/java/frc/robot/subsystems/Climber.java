@@ -120,12 +120,12 @@ public class Climber extends SubsystemBase
 
     public void lockClimberSolenoid() 
     {
-        climberSolenoid.set( Constants.CLIMB_LOCKED );
+        climberSolenoid.set( Constants.CLIMBER_LOCKED );
     }
 
     public void unlockClimberSolenoid() 
     {
-        climberSolenoid.set( Constants.CLIMB_UNLOCKED );
+        climberSolenoid.set( Constants.CLIMBER_UNLOCKED );
     }
 
     // public boolean rightTooFarAhead() 
