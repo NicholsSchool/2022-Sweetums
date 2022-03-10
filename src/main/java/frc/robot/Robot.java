@@ -111,6 +111,8 @@ public class Robot extends TimedRobot
 		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() );
 		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() );
 		RobotContainer.getRobotState();
+		SmartDashboard.putNumber( "Left Speed", RobotContainer.j0.getY() );
+		SmartDashboard.putNumber( "Right Speed", RobotContainer.j1.getY() );
   	}
 	
 	@Override
