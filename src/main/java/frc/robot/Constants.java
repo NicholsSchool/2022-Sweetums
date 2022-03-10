@@ -14,9 +14,6 @@ package frc.robot;
  */
 public final class Constants 
 {
-    // Unfold Power
-    public static final double CLIMBER_UNFOLD_VELOCITY = -600.0; 
-
     // Climb Power
     public static final double CLIMBER_CLIMB_VELOCITY = 3000.0; 
 
@@ -38,19 +35,27 @@ public final class Constants
     public static final double LEFT_CLIMB_MIN_OUTPUT = -0.5;
 
     // Roller Power
-    public static final double ROLLER_SPEED = 0.2;
+    public static final double ROLLER_SPEED = 0.5;
 
     // Shooter Power
     public static final double SHOOTER_SPEED = 1.0;
     public static final double CLOSE_ENOUGH = 250.0;
-    
-    // Indexer Power
-    public static final double INDEXER_SPEED = 1.0;
 
     // Shooter Vs
     public static final double HIGH_GOAL_VELOCITY = 16400.0;
     public static final double LOW_GOAL_VELOCITY = 7000.0;
     public static final double THROW_AWAY_VELOCITY = 12000.0;
+    
+    // Indexer Power
+    public static final double INDEXER_SPEED = 1.0;
+
+    // Intake Power
+    public static final double INTAKE_TUCK_POWER = -0.1;
+
+    // Intake Positions
+    public static final double INTAKE_RANGE = 50.0;
+    public static final double DOWN = RobotContainer.intake == null? 50.0 : RobotContainer.intake.getDown(); // I am sorry
+    public static final double UP = DOWN - INTAKE_RANGE;
 
     // Intake PID Control Loop Constants
     public static final double INTAKE_P = 0.1;
@@ -67,4 +72,15 @@ public final class Constants
     public static final double SHOOTER_I = 0;
     public static final double SHOOTER_D = 0;
     public static final double SHOOTER_RAMP_TIME = 1;
+
+    // Default Solenoid Positions
+    public static final boolean CLIMB_LOCKED = false;
+    public static final boolean CLIMB_UNLOCKED = !CLIMB_LOCKED;
+
+    public static final boolean HOOKS_IN = false;
+    public static final boolean HOOKS_OUT = !HOOKS_IN;
+
+    public static final boolean SLIDER_LOCKED = false;
+    public static final boolean SLIDER_UNLOCKED = !SLIDER_LOCKED;
+    ;
 }

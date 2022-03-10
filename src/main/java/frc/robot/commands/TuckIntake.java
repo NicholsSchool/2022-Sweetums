@@ -4,31 +4,31 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class Unfold extends CommandBase
+public class TuckIntake extends CommandBase
 {
-    public Unfold() 
+    public TuckIntake() 
     {
-        addRequirements( RobotContainer.climber );
+        addRequirements( RobotContainer.intake );
     }
 
     @Override
     public void initialize() {}
 
     @Override
-    public void execute() 
+    public void execute()
     {
-        RobotContainer.climber.climbAtVelocity( Constants.CLIMBER_UNFOLD_VELOCITY );
+        RobotContainer.intake.set( Constants.INTAKE_TUCK_POWER );;
     }
 
     @Override
     public void end( boolean interrupted ) 
     {
-        RobotContainer.climber.stop();
+        RobotContainer.intake.stop();
     }
 
     @Override
     public boolean isFinished() 
     {
         return false;
-    }
+    }      
 }

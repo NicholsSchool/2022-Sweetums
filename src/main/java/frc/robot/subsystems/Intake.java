@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
 public class Intake extends SubsystemBase
@@ -15,6 +16,8 @@ public class Intake extends SubsystemBase
     private CANSparkMax intake;
     private RelativeEncoder encoder;
     private SparkMaxPIDController pidController;
+
+    private double down = 50.0;
 
     public Intake()
     {
@@ -30,6 +33,8 @@ public class Intake extends SubsystemBase
         // Encoder
         encoder = intake.getEncoder();
 
+        setPosition( Constants.UP );
+
         // PID Controller
         pidController = intake.getPIDController();
 
@@ -42,6 +47,11 @@ public class Intake extends SubsystemBase
         pidController.setIZone( Constants.INTAKE_Iz );
         pidController.setFF( Constants.INTAKE_FF );
         pidController.setOutputRange( Constants.INTAKE_MIN_OUTPUT , Constants.INTAKE_MAX_OUTPUT );
+    }
+
+    public void set( double power ) 
+    {
+        intake.set( power );
     }
 
     public void move( double speed ) 
@@ -67,6 +77,16 @@ public class Intake extends SubsystemBase
     public void resetEncoder()
     {
         setPosition( 0 );
+    }
+
+    public void resetDown() 
+    {
+        down = getPosition();
+    }
+
+    public double getDown() 
+    {
+        return down;
     }
 
     public void goToPosition( double position ) 

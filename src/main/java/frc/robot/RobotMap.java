@@ -23,6 +23,8 @@ public class RobotMap
     public static final double GOVERNOR_FAST = 1.0;
     public static final double GOVERNOR_SLOW = 0.7;
     public static double GOVERNOR = GOVERNOR_SLOW;
+
+    public static final int BUTTON_CHANNEL = 0;
     
     public static final int SLIDER_SOLENOID_CHANNEL = 0;
 
@@ -30,5 +32,5 @@ public class RobotMap
 
     public static final int HOOKS_SOLENOID_CHANNEL = 2;
 
-    public static final int BONUS_SOLENOID_CHANNEL = 3;
+    public static final int CLIMBER_SLOENOID_CHANNEL = 3;
 }

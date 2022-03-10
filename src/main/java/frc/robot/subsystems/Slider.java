@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -16,7 +16,7 @@ public class Slider extends SubsystemBase
     {
         slider = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.SLIDER_SOLENOID_CHANNEL );
 
-        slider.set( false );
+        lockSliderSolenoid();
     }
 
     public boolean get() 
@@ -29,13 +29,13 @@ public class Slider extends SubsystemBase
         slider.toggle();
     }
 
-    public void release()
+    public void lockSliderSolenoid()
     {
-        slider.set( true );
+        slider.set( Constants.SLIDER_LOCKED );
     }
 
-    public void returnToOriginalState()
+    public void unlockSliderSolenoid()
     {
-        slider.set( false );
+        slider.set( Constants.SLIDER_UNLOCKED );
     }
 }

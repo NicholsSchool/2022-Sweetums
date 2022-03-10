@@ -30,10 +30,8 @@ public class RobotContainer
 	// Compressor
 	Compressor compressor;
 
-	// Double Buttons
-	DoubleButton climbButton;
-
 	// Subsystems
+	public static Button button;
 	public static Climber climber;
 	public static DriveTrain driveTrain;
 	public static Hooks hooks;
@@ -56,10 +54,8 @@ public class RobotContainer
 
 		compressor = new Compressor( PneumaticsModuleType.CTREPCM );
 		
-		// DoubleButton
-		climbButton = new DoubleButton( j1.b6, c2.a );
-
 		// Subsystems
+		button = new Button();
 		climber = new Climber();
     	driveTrain = new DriveTrain();
 		hooks = new Hooks();
@@ -88,14 +84,16 @@ public class RobotContainer
 	{
 		driveTrain.setDefaultCommand( new Drive() );
 
+		button.setDefaultCommand( new CheckButton() );
+
 		// Driver
         j0.b2.whenPressed( new InstantCommand( () -> shifter.toggle() ) );
 
 		j0.b1.whileHeld( new TakeIn() );
 
-		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
+		j1.b1.whenPressed( new InstantCommand( () -> intake.goToPosition( Constants.DOWN ) ) );
 		j1.b1.whileHeld( new TakeIn() );
-		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
+		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( Constants.UP ) ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
@@ -103,9 +101,11 @@ public class RobotContainer
 		c2.dpadDown.whileHeld( new ThrowAway() );
 
 		// Climbing
-		climbButton.whileHeld( new Unfold() );
-		c2.b.whenPressed( new InstantCommand( () -> slider.toggle() ).andThen( new InstantCommand( () -> hooks.toggle() ) ) );
-		c2.y.whileHeld( new Climb() );
+		c2.a.whenPressed( new InstantCommand( () -> climber.toggleClimberSolenoid() ) );
+		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
+		c2.y.whenPressed( new InstantCommand( () -> slider.unlockSliderSolenoid() ) );
+		c2.x.toggleWhenPressed( new TuckIntake() );
+		c2.start.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new Climb() ) );
 
 		// c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 		// c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );

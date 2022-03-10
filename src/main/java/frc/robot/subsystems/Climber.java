@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
@@ -18,11 +20,15 @@ public class Climber extends SubsystemBase
     private CANSparkMax rightClimb;
     private CANSparkMax leftClimb;
 
-    private RelativeEncoder rightClimbEncoder;
-    private RelativeEncoder leftClimbEncoder;
+    private RelativeEncoder rightClimberEncoder;
+    private RelativeEncoder leftClimberEncoder;
+
+    private Solenoid climberSolenoid;
 
     private SparkMaxPIDController rightClimbPIDController;
     private SparkMaxPIDController leftClimbPIDController;
+
+    // private final double EPSILON = 1;
 
     public Climber() 
     {
@@ -38,12 +44,18 @@ public class Climber extends SubsystemBase
         rightClimb.setInverted( false );
         leftClimb.setInverted( true );
 
-        rightClimbEncoder = rightClimb.getEncoder();
-        leftClimbEncoder = leftClimb.getEncoder();
+        rightClimberEncoder = rightClimb.getEncoder();
+        leftClimberEncoder = leftClimb.getEncoder();
+
+        resetClimberEncoders();
+
+        climberSolenoid = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.CLIMBER_SLOENOID_CHANNEL );
+
+        lockClimberSolenoid();
 
         rightClimbPIDController = rightClimb.getPIDController();
 
-        rightClimbPIDController.setFeedbackDevice( rightClimbEncoder );
+        rightClimbPIDController.setFeedbackDevice( rightClimberEncoder );
 
         // PID Settings
         rightClimbPIDController.setP( Constants.RIGHT_CLIMB_P );
@@ -55,7 +67,7 @@ public class Climber extends SubsystemBase
 
         leftClimbPIDController = leftClimb.getPIDController();
 
-        leftClimbPIDController.setFeedbackDevice( leftClimbEncoder );
+        leftClimbPIDController.setFeedbackDevice( leftClimberEncoder );
 
         // PID Settings
         leftClimbPIDController.setP( Constants.LEFT_CLIMB_P );
@@ -70,6 +82,8 @@ public class Climber extends SubsystemBase
     {
         rightClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );
         leftClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );
+        // rightClimbPIDController.setReference( rightTooFarAhead()? velocity / 3 : velocity, CANSparkMax.ControlType.kVelocity );
+        // leftClimbPIDController.setReference( leftTooFarAhead()? velocity / 3 : velocity, CANSparkMax.ControlType.kVelocity );
     }
 
     public void stop() 
@@ -78,13 +92,44 @@ public class Climber extends SubsystemBase
         leftClimb.stopMotor();
     }
 
+    public void resetClimberEncoders() 
+    {
+        rightClimberEncoder.setPosition( 0.0 );
+        leftClimberEncoder.setPosition( 0.0 );
+    }
+
     public double getLeftClimberPosition() 
     {
-        return leftClimbEncoder.getPosition();
+        return leftClimberEncoder.getPosition();
     }
 
     public double getRightClimberPosition() 
     {
-        return rightClimbEncoder.getPosition();
+        return rightClimberEncoder.getPosition();
     }
+
+    public void toggleClimberSolenoid() 
+    {
+        climberSolenoid.toggle();
+    }
+
+    public void lockClimberSolenoid() 
+    {
+        climberSolenoid.set( Constants.CLIMB_LOCKED );
+    }
+
+    public void unlockClimberSolenoid() 
+    {
+        climberSolenoid.set( Constants.CLIMB_UNLOCKED );
+    }
+
+    // public boolean rightTooFarAhead() 
+    // {
+    //     return getRightClimberPosition() - getLeftClimberPosition() > EPSILON;
+    // }
+
+    // public boolean leftTooFarAhead() 
+    // {
+    //     return getLeftClimberPosition() - getRightClimberPosition() > EPSILON;
+    // }
 }
