@@ -6,6 +6,10 @@ package frc.robot;
 
 import java.util.Hashtable;
 
+import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -63,7 +67,10 @@ public class Robot extends TimedRobot
 	 * This function is called once each time the robot enters Disabled mode. 
 	 */
 	@Override
-	public void disabledInit() {}
+	public void disabledInit() 
+	{
+		RobotContainer.hooks.set( Constants.HOOKS_OUT );
+	}
 
 	@Override
 	public void disabledPeriodic() {}
@@ -109,18 +116,30 @@ public class Robot extends TimedRobot
 		SmartDashboard.putBoolean("Low Gear", RobotContainer.shifter.get() == Constants.LOW_GEAR );
 		SmartDashboard.putBoolean("Hooks In", RobotContainer.hooks.get() == Constants.HOOKS_IN );
 		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() == Constants.CLIMBER_UNLOCKED );
-		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.CLIMBER_UNLOCKED );
+		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.SLIDER_UNLOCKED );
 		RobotContainer.getRobotState();
   	}
-	
+
+	// WPI_TalonFX motor, motor2;	
+
 	@Override
 	public void testInit() 
 	{
 		// Cancels all running commands at the start of test mode.
-		CommandScheduler.getInstance().cancelAll();
+		// CommandScheduler.getInstance().cancelAll();
+
+		// motor = new WPI_TalonFX( RobotMap.LEFT_FRONT_DRIVE_ID );
+		// motor2 = new WPI_TalonFX( RobotMap.RIGHT_FRONT_DRIVE_ID );
+
+		// motor2.follow( motor, FollowerType.AuxOutput1 );
 	}
+
+
 
 	/** This function is called periodically during test mode. */
 	@Override
-	public void testPeriodic() {}
+	public void testPeriodic() 
+	{
+		// motor.set( 0.25 );
+	}
 }

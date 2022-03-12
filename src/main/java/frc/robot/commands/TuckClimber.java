@@ -1,37 +1,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class LiftArm extends CommandBase
+public class TuckClimber extends CommandBase 
 {
-    private final double POWER;
-
-    public LiftArm( double power ) 
+    public TuckClimber() 
     {
-        addRequirements( RobotContainer.intake );
-
-        POWER = power;
+        addRequirements( RobotContainer.climber );
     }
-
+    
     @Override
     public void initialize() {}
 
     @Override
     public void execute()
     {
-        RobotContainer.intake.move( POWER );
+        RobotContainer.climber.climb( Constants.CLIMBER_TUCK_POWER );
     }
 
     @Override
     public void end( boolean interrupted ) 
     {
-        RobotContainer.intake.stop();
+        RobotContainer.climber.stop();
     }
 
     @Override
     public boolean isFinished() 
     {
         return false;
-    }    
+    }   
 }

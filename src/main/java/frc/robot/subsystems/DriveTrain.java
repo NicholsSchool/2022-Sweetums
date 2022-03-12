@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -14,7 +16,13 @@ public class DriveTrain extends SubsystemBase
     private WPI_TalonFX rBDrive;
     private WPI_TalonFX lBDrive;
 
+    private MotorControllerGroup rightDrives;
+    private MotorControllerGroup leftDrives;
+
     private DifferentialDrive diffDrive;
+
+    private double EPSILON = 0.2;
+    private boolean ignoreCorrection;
 
     public DriveTrain() 
     {
@@ -28,22 +36,38 @@ public class DriveTrain extends SubsystemBase
         lFDrive.configFactoryDefault();
         lBDrive.configFactoryDefault();
 
-        diffDrive = new DifferentialDrive( lFDrive, rFDrive );
-
-        rBDrive.follow( rFDrive );
-        lBDrive.follow( lFDrive );
-
         rFDrive.setInverted( true );
         rBDrive.setInverted( true );
         lFDrive.setInverted( false );
         lBDrive.setInverted( false );
+
+        rightDrives = new MotorControllerGroup( rFDrive, rBDrive );
+        leftDrives = new MotorControllerGroup( lFDrive, lBDrive );
+
+        diffDrive = new DifferentialDrive( leftDrives, rightDrives );
+
+        ignoreCorrection = false;
 
         brake();
     }
 
     public void move( double leftSpeed, double rightSpeed ) 
     {
-        diffDrive.tankDrive( leftSpeed, rightSpeed );
+        SmartDashboard.putNumber( "Left Stick Y", leftSpeed );
+        SmartDashboard.putNumber( "Right Stick Y", rightSpeed );
+        SmartDashboard.putNumber( "leftSpeed", Math.abs( rightSpeed - leftSpeed ) > EPSILON? leftSpeed : rightSpeed );
+        SmartDashboard.putNumber( "rightSpeed", rightSpeed );
+
+        if( Math.abs( rightSpeed - leftSpeed ) < EPSILON && 
+            rightSpeed * leftSpeed > 0 && !ignoreCorrection )
+            diffDrive.tankDrive( rightSpeed, rightSpeed );
+        else 
+            diffDrive.tankDrive( leftSpeed, rightSpeed );
+    }
+
+    public void setToIgnoreCorrection( boolean willIgnore ) 
+    {
+        ignoreCorrection = willIgnore;
     }
 
     public void stop() 

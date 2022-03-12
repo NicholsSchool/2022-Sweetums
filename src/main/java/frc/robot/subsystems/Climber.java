@@ -78,6 +78,12 @@ public class Climber extends SubsystemBase
         leftClimbPIDController.setOutputRange( Constants.LEFT_CLIMB_MIN_OUTPUT , Constants.LEFT_CLIMB_MAX_OUTPUT );
     }
 
+    public void climb( double power ) 
+    {
+        rightClimb.set( power );
+        leftClimb.set( power );
+    }
+
     public void climbAtVelocity( double velocity ) 
     {
         rightClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );

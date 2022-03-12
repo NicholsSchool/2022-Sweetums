@@ -15,14 +15,15 @@ package frc.robot;
 public final class Constants 
 {
     // DriveTrain Power
-    public static final double DRIVE_TRAIN_POWER = 0.75;
+    public static final double DRIVE_TRAIN_POWER = 0.4;
 
     // Gears 
-    public static final boolean HIGH_GEAR = false;
+    public static final boolean HIGH_GEAR = true;
     public static final boolean LOW_GEAR = !HIGH_GEAR;
 
     // Climb Power
     public static final double CLIMBER_CLIMB_VELOCITY = 3000.0; 
+    public static final double CLIMBER_TUCK_POWER = -0.10;
 
     // Climber PID
     public static final double RIGHT_CLIMB_P = 0.1;
@@ -42,7 +43,7 @@ public final class Constants
     public static final double LEFT_CLIMB_MIN_OUTPUT = -0.5;
 
     // Roller Power
-    public static final double ROLLER_SPEED = 0.9;
+    public static final double ROLLER_SPEED = 0.95;
 
     // Shooter Power
     public static final double SHOOTER_SPEED = 1.0;
@@ -58,8 +59,8 @@ public final class Constants
 
     // Intake Power
     public static final double INTAKE_GO_DOWN_POWER = 0.5;
-
     public static final double INTAKE_TUCK_POWER = -0.1;
+    public static final double INTAKE_SLAM_DOWN_POWER = 1.0;
 
     // Intake Positions
     public static final double INTAKE_RANGE = 50.0;
@@ -70,7 +71,7 @@ public final class Constants
     public static final double INTAKE_D = 0.3; // 0.1
     public static final double INTAKE_Iz = 0;
     public static final double INTAKE_FF = 0;
-    public static final double INTAKE_MAX_OUTPUT = 0.33;
+    public static final double INTAKE_MAX_OUTPUT = 0.50;
     public static final double INTAKE_MIN_OUTPUT = -0.40;
 
     // Shooter PID Control Loop Constants

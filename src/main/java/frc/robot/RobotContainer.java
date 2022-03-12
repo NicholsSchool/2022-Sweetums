@@ -105,6 +105,11 @@ public class RobotContainer
 		j1.b1.whileHeld( new TakeIn() );
 		j1.b1.whenReleased( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 
+		j0.b5.whileHeld( new LiftArm( Constants.INTAKE_SLAM_DOWN_POWER ) );
+
+		j1.b2.whenPressed( new InstantCommand( () -> driveTrain.setToIgnoreCorrection( true ) ) );
+		j1.b2.whenReleased( new InstantCommand( () -> driveTrain.setToIgnoreCorrection( false ) ) );
+
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
@@ -112,6 +117,7 @@ public class RobotContainer
 
 		// Climbing
 		c2.a.whenPressed( new InstantCommand( () -> climber.toggleClimberSolenoid() ) );
+		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
 		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
 		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
 		c2.x.toggleWhenPressed( new TuckIntake() );
@@ -138,6 +144,6 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new ShootBalls( Constants.HIGH_GOAL_VELOCITY ).withTimeout( 4 ).andThen( new TimeDrive( 4, -Constants.DRIVE_TRAIN_POWER ).withTimeout( 3 ) );
+		return new ShootBalls( Constants.HIGH_GOAL_VELOCITY ).withTimeout( 4 ).andThen( new TimeDrive( 4, -Constants.DRIVE_TRAIN_POWER ).withTimeout( 11 ) );
 	}
 }
