@@ -26,21 +26,21 @@ public final class Constants
     public static final double CLIMBER_TUCK_POWER = -0.10;
 
     // Climber PID
-    public static final double RIGHT_CLIMB_P = 0.1;
-    public static final double RIGHT_CLIMB_I = 1e-4;
-    public static final double RIGHT_CLIMB_D = 0.1;
-    public static final double RIGHT_CLIMB_Iz = 0;
-    public static final double RIGHT_CLIMB_FF = 0;
-    public static final double RIGHT_CLIMB_MAX_OUTPUT = 0.5;
-    public static final double RIGHT_CLIMB_MIN_OUTPUT = -0.5;
+    public static final double RIGHT_CLIMB_P = 0.025;
+    public static final double RIGHT_CLIMB_I = 0.0;
+    public static final double RIGHT_CLIMB_D = 0.0;
+    public static final double RIGHT_CLIMB_Iz = 0.0;
+    public static final double RIGHT_CLIMB_FF = 0.00035;
+    public static final double RIGHT_CLIMB_MAX_OUTPUT = 1.0;
+    public static final double RIGHT_CLIMB_MIN_OUTPUT = -1.0;
 
-    public static final double LEFT_CLIMB_P = 0.1;
-    public static final double LEFT_CLIMB_I = 1e-4;
-    public static final double LEFT_CLIMB_D = 0.1;
-    public static final double LEFT_CLIMB_Iz = 0;
-    public static final double LEFT_CLIMB_FF = 0;
-    public static final double LEFT_CLIMB_MAX_OUTPUT = 0.5;
-    public static final double LEFT_CLIMB_MIN_OUTPUT = -0.5;
+    public static final double LEFT_CLIMB_P = 0.025;
+    public static final double LEFT_CLIMB_I = 0.0;
+    public static final double LEFT_CLIMB_D = 0.0;
+    public static final double LEFT_CLIMB_Iz = 0.0;
+    public static final double LEFT_CLIMB_FF = 0.00035;
+    public static final double LEFT_CLIMB_MAX_OUTPUT = 1.0;
+    public static final double LEFT_CLIMB_MIN_OUTPUT = -1.0;
 
     // Roller Power
     public static final double ROLLER_SPEED = 0.95;

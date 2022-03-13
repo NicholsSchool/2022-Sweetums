@@ -47,8 +47,6 @@ public class Climber extends SubsystemBase
         rightClimberEncoder = rightClimb.getEncoder();
         leftClimberEncoder = leftClimb.getEncoder();
 
-        resetClimberEncoders();
-
         climberSolenoid = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.CLIMBER_SLOENOID_CHANNEL );
 
         lockClimberSolenoid();
@@ -82,6 +80,12 @@ public class Climber extends SubsystemBase
     {
         rightClimb.set( power );
         leftClimb.set( power );
+    }
+
+    public void climbToPositions( double leftPosition, double rightPosition ) 
+    {
+        rightClimbPIDController.setReference( rightPosition, CANSparkMax.ControlType.kPosition );
+        leftClimbPIDController.setReference( leftPosition, CANSparkMax.ControlType.kPosition );
     }
 
     public void climbAtVelocity( double velocity ) 

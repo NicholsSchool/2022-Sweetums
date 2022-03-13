@@ -117,6 +117,8 @@ public class Robot extends TimedRobot
 		SmartDashboard.putBoolean("Hooks In", RobotContainer.hooks.get() == Constants.HOOKS_IN );
 		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() == Constants.CLIMBER_UNLOCKED );
 		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.SLIDER_UNLOCKED );
+		SmartDashboard.putNumber( "Left Climb Position", RobotContainer.climber.getLeftClimberPosition() );
+		SmartDashboard.putNumber( "Right Climb Position", RobotContainer.climber.getRightClimberPosition() );
 		RobotContainer.getRobotState();
   	}
 

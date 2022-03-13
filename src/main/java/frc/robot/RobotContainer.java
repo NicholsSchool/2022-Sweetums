@@ -116,12 +116,17 @@ public class RobotContainer
 		c2.dpadDown.whileHeld( new ThrowAway() );
 
 		// Climbing
-		c2.a.whenPressed( new InstantCommand( () -> climber.toggleClimberSolenoid() ) );
+		c2.a.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( 
+						  new InstantCommand( () -> climber.toggleClimberSolenoid() ) ) ); 
+
+		c2.dpadLeft.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ) );
+
 		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
 		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
 		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
 		c2.x.toggleWhenPressed( new TuckIntake() );
-		c2.start.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new Climb() ) );
+		c2.dpadRight.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new ClimbV() ) );
+		c2.start.toggleWhenPressed( new PIDClimb( 77, 77 ) );
 
 		// c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
 		// c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );

@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class Climb extends CommandBase
+public class ClimbV extends CommandBase
 {
-    public Climb() 
+    public ClimbV() 
     {
         addRequirements( RobotContainer.climber );
     }
@@ -17,7 +17,7 @@ public class Climb extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.climber.climbAtVelocity( Constants.CLIMBER_CLIMB_VELOCITY );
+        RobotContainer.climber.climbAtVelocity( Constants.CLIMBER_CLIMB_VELOCITY * RobotContainer.j1.getRawAxis( 3 ) );
     }
 
     @Override
