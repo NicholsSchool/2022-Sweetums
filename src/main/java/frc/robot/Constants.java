@@ -90,5 +90,7 @@ public final class Constants
 
     public static final boolean SLIDER_LOCKED = false;
     public static final boolean SLIDER_UNLOCKED = !SLIDER_LOCKED;
-    ;
+
+    // NavX Constants
+    public static final double CLOSE_ENOUGH_ANGLE = 5;
 }

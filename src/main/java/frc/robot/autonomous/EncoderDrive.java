@@ -12,18 +12,19 @@ import frc.robot.RobotContainer;
 
 public class EncoderDrive extends CommandBase 
 {
-    private double distance;
-    private double power;
+    private final double DISTANCE;
+    private final double SPEED;
 
     /**
-     * @param dist distance to travel
-     * @param pow power to give motor
+     * @param distance distance to travel
+     * @param speed power to give motor
      */
-    public EncoderDrive(double dist, double pow ) 
+    public EncoderDrive( double distance, double speed ) 
     {        
-        addRequirements(RobotContainer.driveTrain);
-        distance = dist;
-        power = pow;
+        addRequirements( RobotContainer.driveTrain );
+
+        DISTANCE = distance;
+        SPEED = speed;
     }
 
     @Override
@@ -35,10 +36,9 @@ public class EncoderDrive extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.driveTrain.move( power, power );
+        RobotContainer.driveTrain.move( DISTANCE > 0? SPEED : -SPEED, DISTANCE > 0? SPEED : -SPEED );
     }
 
-    // Called once the command ends or is interrupted.
     @Override
     public void end( boolean interrupted ) 
     {
@@ -48,7 +48,7 @@ public class EncoderDrive extends CommandBase
     @Override
     public boolean isFinished() 
     {
-        return distance <= Math.abs( RobotContainer.driveTrain.getEncoderValue() );
+        return DISTANCE < Math.abs( RobotContainer.driveTrain.getEncoderValue() );
     }
 
 }

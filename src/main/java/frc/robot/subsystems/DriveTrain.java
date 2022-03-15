@@ -55,14 +55,23 @@ public class DriveTrain extends SubsystemBase
     {
         SmartDashboard.putNumber( "Left Stick Y", leftSpeed );
         SmartDashboard.putNumber( "Right Stick Y", rightSpeed );
-        SmartDashboard.putNumber( "leftSpeed", Math.abs( rightSpeed - leftSpeed ) > EPSILON? leftSpeed : rightSpeed );
-        SmartDashboard.putNumber( "rightSpeed", rightSpeed );
 
         if( Math.abs( rightSpeed - leftSpeed ) < EPSILON && 
-            rightSpeed * leftSpeed > 0 && !ignoreCorrection )
+            rightSpeed * leftSpeed > 0 && 
+            !ignoreCorrection )
+        {
             diffDrive.tankDrive( rightSpeed, rightSpeed );
+
+            SmartDashboard.putNumber( "leftSpeed", rightSpeed );
+            SmartDashboard.putNumber( "rightSpeed", rightSpeed );
+        }
         else 
+        {
             diffDrive.tankDrive( leftSpeed, rightSpeed );
+
+            SmartDashboard.putNumber( "leftSpeed", leftSpeed );
+            SmartDashboard.putNumber( "rightSpeed", rightSpeed );
+        }
     }
 
     public void setToIgnoreCorrection( boolean willIgnore ) 

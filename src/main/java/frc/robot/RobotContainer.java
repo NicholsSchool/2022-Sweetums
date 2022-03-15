@@ -4,13 +4,17 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.SPI;
 import frc.robot.autonomous.ShootBalls;
 import frc.robot.autonomous.TimeDrive;
 import frc.robot.commands.*;
+import frc.robot.sensors.NavX;
 import frc.robot.subsystems.*;
 import frc.robot.util.*;
 
@@ -37,12 +41,13 @@ public class RobotContainer
 	public static DigitalInput button;
 
 	// Subsystems
-	// public static Button button;
+	public static AHRS ahrs;
 	public static Climber climber;
 	public static DriveTrain driveTrain;
 	public static Hooks hooks;
 	public static Indexer indexer;
 	public static Intake intake;
+	public static NavX navX;
 	public static Roller roller;
 	public static Shifter shifter; 
 	public static Shooter shooter;
@@ -65,19 +70,16 @@ public class RobotContainer
 		button = new DigitalInput( RobotMap.BUTTON_CHANNEL );
 
 		// Subsystems
-		// button = new Button();
+		ahrs = new AHRS( SPI.Port.kMXP );
 		climber = new Climber();
     	driveTrain = new DriveTrain();
 		hooks = new Hooks();
 		indexer = new Indexer();
-
 		intake = new Intake();
 		intake.resetEncoder();
-
+		navX = new NavX( ahrs );
 		roller = new Roller();
-
 		shifter = new Shifter();
-
 		shooter = new Shooter();
 		slider = new Slider();
 
