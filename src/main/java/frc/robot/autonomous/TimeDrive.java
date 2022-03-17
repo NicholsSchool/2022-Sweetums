@@ -1,24 +1,21 @@
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class TimeDrive extends CommandBase 
 {
     private final long START_TIME;
-    private final long TIME_TO_TAKE;
 
-    private final double POWER;
+    private final double SPEED;
     
-    public TimeDrive( int t, double power ) 
+    public TimeDrive( int time, double speed ) 
     {
         addRequirements( RobotContainer.driveTrain );
 
-        START_TIME  = System.currentTimeMillis() / 1000;
-        TIME_TO_TAKE = t;
+        START_TIME = System.currentTimeMillis();
 
-        POWER = power;
+        SPEED = speed;
     }
 
     @Override
@@ -27,7 +24,7 @@ public class TimeDrive extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.driveTrain.move( POWER, POWER );
+        RobotContainer.driveTrain.move( SPEED, SPEED );
     }
 
     @Override
@@ -40,6 +37,5 @@ public class TimeDrive extends CommandBase
     public boolean isFinished() 
     {
         return false;
-        // return ( System.currentTimeMillis() / 1000 ) - START_TIME > TIME_TO_TAKE;
     }
 }

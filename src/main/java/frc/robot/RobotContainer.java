@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
-import frc.robot.autonomous.ShootBalls;
-import frc.robot.autonomous.TimeDrive;
+import frc.robot.autonomous.EncoderDrive;
+import frc.robot.autonomous.GyroTurn;
+import frc.robot.autonomous.*;
 import frc.robot.commands.*;
 import frc.robot.sensors.NavX;
 import frc.robot.subsystems.*;
@@ -116,24 +117,20 @@ public class RobotContainer
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
 		c2.dpadDown.whileHeld( new ThrowAway() );
+		c2.dpadUp.whileHeld( new ShootTest() );
 
-		// Climbing
-		c2.a.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( 
-						  new InstantCommand( () -> climber.toggleClimberSolenoid() ) ) ); 
+		// // Climbing
+		// c2.a.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( 
+		// 				  new InstantCommand( () -> climber.toggleClimberSolenoid() ) ) ); 
 
-		c2.dpadLeft.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ) );
+		// c2.dpadLeft.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ) );
 
 		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
 		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
 		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
 		c2.x.toggleWhenPressed( new TuckIntake() );
-		c2.dpadRight.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new ClimbV() ) );
+		c2.dpadRight.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new PIDClimb( 78, 78 ) ) );
 		c2.start.toggleWhenPressed( new PIDClimb( 77, 77 ) );
-
-		// c2.dpadUp.whenPressed( new InstantCommand( () -> intake.goToPosition( 0 ) ) );
-		// c2.dpadDown.whenPressed( new InstantCommand( () -> intake.goToPosition( 50 ) ) );
-		// c2.a.whileHeld( new TakeOut() );
-		// c2.b.whileHeld( new TakeIn() );
 	}
 
 	public static void getRobotState() 
@@ -151,6 +148,6 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new ShootBalls( Constants.HIGH_GOAL_VELOCITY ).withTimeout( 4 ).andThen( new TimeDrive( 4, -Constants.DRIVE_TRAIN_POWER ).withTimeout( 11 ) );
+		return new InstantCommand( () -> intake.goToPosition( 50 ) ).andThen( new EncoderDrive( 48, 0.5 ).andThen( new GyroTurn( 90, 0.5 ) ) );
 	}
 }

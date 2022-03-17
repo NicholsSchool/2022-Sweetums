@@ -8,6 +8,7 @@
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class EncoderDrive extends CommandBase 
@@ -15,16 +16,12 @@ public class EncoderDrive extends CommandBase
     private final double DISTANCE;
     private final double SPEED;
 
-    /**
-     * @param distance distance to travel
-     * @param speed power to give motor
-     */
     public EncoderDrive( double distance, double speed ) 
     {        
         addRequirements( RobotContainer.driveTrain );
 
-        DISTANCE = distance;
-        SPEED = speed;
+        DISTANCE = distance * Constants.TICKS_PER_INCH; // Can be + or -, + for going forward, - for going backward
+        SPEED = Math.abs( speed );
     }
 
     @Override
@@ -48,7 +45,7 @@ public class EncoderDrive extends CommandBase
     @Override
     public boolean isFinished() 
     {
-        return DISTANCE < Math.abs( RobotContainer.driveTrain.getEncoderValue() );
+        return Math.abs( RobotContainer.driveTrain.getEncoderValue() - DISTANCE ) < Constants.CLOSE_ENOUGH_DISTANCE;
     }
 
 }
