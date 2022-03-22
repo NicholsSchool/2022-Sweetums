@@ -48,7 +48,7 @@ public class DriveTrain extends SubsystemBase
 
         ignoreCorrection = false;
 
-        brake();
+        coast();
     }
 
     public void move( double leftSpeed, double rightSpeed ) 

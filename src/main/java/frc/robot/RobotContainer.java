@@ -130,7 +130,7 @@ public class RobotContainer
 		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
 		c2.x.toggleWhenPressed( new TuckIntake() );
 		c2.dpadRight.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new PIDClimb( 78, 78 ) ) );
-		c2.start.toggleWhenPressed( new PIDClimb( 77, 77 ) );
+		c2.start.whileHeld( new PIDClimb( 77, 77 ) );
 	}
 
 	public static void getRobotState() 
