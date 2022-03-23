@@ -74,6 +74,8 @@ public class Climber extends SubsystemBase
         leftClimbPIDController.setIZone( Constants.LEFT_CLIMB_Iz );
         leftClimbPIDController.setFF( Constants.LEFT_CLIMB_FF );
         leftClimbPIDController.setOutputRange( Constants.LEFT_CLIMB_MIN_OUTPUT , Constants.LEFT_CLIMB_MAX_OUTPUT );
+
+        
     }
 
     public void climb( double power ) 

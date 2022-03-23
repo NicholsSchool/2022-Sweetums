@@ -88,6 +88,8 @@ public class Robot extends TimedRobot
     	{
 			m_autonomousCommand.schedule();
 		}
+
+		RobotContainer.driveTrain.brake();
 	}
 
   	/** This function is called periodically during autonomous. */
@@ -119,7 +121,8 @@ public class Robot extends TimedRobot
 		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.SLIDER_UNLOCKED );
 		SmartDashboard.putNumber( "Left Climb Position", RobotContainer.climber.getLeftClimberPosition() );
 		SmartDashboard.putNumber( "Right Climb Position", RobotContainer.climber.getRightClimberPosition() );
-		SmartDashboard.putNumber( "DriveTrain Encoder Value", RobotContainer.driveTrain.getEncoderValue() );
+		SmartDashboard.putNumber( "Front Right Encoder Value", RobotContainer.driveTrain.getFrontRightEncoderValue() );
+		SmartDashboard.putNumber( "Front Left Encoder Value", RobotContainer.driveTrain.getFrontLeftEncoderValue() );
 		SmartDashboard.putNumber( "Test Velocity", Constants.TEST_VELOCITY );
 		RobotContainer.getRobotState();
   	}

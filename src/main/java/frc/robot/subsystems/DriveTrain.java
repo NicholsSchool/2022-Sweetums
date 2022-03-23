@@ -47,8 +47,6 @@ public class DriveTrain extends SubsystemBase
         diffDrive = new DifferentialDrive( leftDrives, rightDrives );
 
         ignoreCorrection = false;
-
-        brake();
     }
 
     public void move( double leftSpeed, double rightSpeed ) 
@@ -103,9 +101,14 @@ public class DriveTrain extends SubsystemBase
         lBDrive.setNeutralMode( NeutralMode.Coast );
     }
 
-    public double getEncoderValue()
+    public double getFrontRightEncoderValue()
     {
         return rFDrive.getSelectedSensorPosition();
+    }
+
+    public double getFrontLeftEncoderValue() 
+    {
+        return lFDrive.getSelectedSensorPosition();
     }
 
     public void resetEncoder()

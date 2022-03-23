@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
@@ -125,12 +126,13 @@ public class RobotContainer
 
 		// c2.dpadLeft.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ) );
 
+		c2.a.whenPressed( new InstantCommand( () -> climber.toggleClimberSolenoid() ) );
 		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
 		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
 		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
 		c2.x.toggleWhenPressed( new TuckIntake() );
 		c2.dpadRight.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new PIDClimb( 78, 78 ) ) );
-		c2.start.toggleWhenPressed( new PIDClimb( 77, 77 ) );
+		c2.start.whileHeld( new PIDClimb( 90, 90 ) );
 	}
 
 	public static void getRobotState() 
@@ -148,6 +150,15 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new InstantCommand( () -> intake.goToPosition( 50 ) ).andThen( new EncoderDrive( 48, 0.5 ).andThen( new GyroTurn( 90, 0.5 ) ) );
+		return new EncoderDrive( 0, 18, 0.5 );
+		// return new ShootLow().withTimeout( 3.0 ).andThen( 
+		// 	   new EncoderDrive( -139, -139,  0.50 ), 
+		// 	   new InstantCommand( () -> intake.goToPosition( 50 ) ),
+		// 	   new EncoderDrive( 0, 18, 0.5 ).alongWith( new TakeIn() ).withTimeout( 5.0 ),
+		// 	   new InstantCommand( () -> intake.goToPosition( 0 ) ), 
+		// 	   new TakeIn().withTimeout( 1.0 ), 
+		// 	   new EncoderDrive( 0, -18, 0.5 ),
+		// 	   new EncoderDrive( 145, 145, 0.5 ),
+		// 	   new ShootLow() );
 	}
 }

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,14 +6,15 @@ import frc.robot.RobotContainer;
 
 public class EncoderDrive extends CommandBase 
 {
-    private final double DISTANCE;
+    private final double RIGHT_DISTANCE;
+    private final double LEFT_DISTANCE;
     private final double SPEED;
 
-    public EncoderDrive( double distance, double speed ) 
+    public EncoderDrive( double leftDistance, double rightDistance, double speed ) 
     {        
         addRequirements( RobotContainer.driveTrain );
-
-        DISTANCE = distance * Constants.TICKS_PER_INCH; // Can be + or -, + for going forward, - for going backward
+        RIGHT_DISTANCE = rightDistance * Constants.TICKS_PER_INCH; // Can be + or -, + for going forward, - for going backward
+        LEFT_DISTANCE = leftDistance * Constants.TICKS_PER_INCH;
         SPEED = Math.abs( speed );
     }
 
@@ -33,7 +27,7 @@ public class EncoderDrive extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.driveTrain.move( DISTANCE > 0? SPEED : -SPEED, DISTANCE > 0? SPEED : -SPEED );
+        RobotContainer.driveTrain.move( LEFT_DISTANCE > 0? SPEED : -SPEED, RIGHT_DISTANCE > 0? SPEED : -SPEED );
     }
 
     @Override
@@ -45,7 +39,8 @@ public class EncoderDrive extends CommandBase
     @Override
     public boolean isFinished() 
     {
-        return Math.abs( RobotContainer.driveTrain.getEncoderValue() - DISTANCE ) < Constants.CLOSE_ENOUGH_DISTANCE;
+        return Math.abs( RobotContainer.driveTrain.getFrontRightEncoderValue() - RIGHT_DISTANCE ) < Constants.CLOSE_ENOUGH_DISTANCE &&
+               Math.abs( RobotContainer.driveTrain.getFrontLeftEncoderValue() - LEFT_DISTANCE ) < Constants.CLOSE_ENOUGH_DISTANCE;
     }
 
 }
