@@ -22,6 +22,8 @@ import frc.robot.util.*;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -111,13 +113,16 @@ public class RobotContainer
 
 		j0.b5.whileHeld( new LiftArm( Constants.INTAKE_SLAM_DOWN_POWER ) );
 
-		j1.b2.whenPressed( new InstantCommand( () -> driveTrain.setToIgnoreCorrection( true ) ) );
-		j1.b2.whenReleased( new InstantCommand( () -> driveTrain.setToIgnoreCorrection( false ) ) );
+		j1.b2.whenPressed( new InstantCommand( () -> driveTrain.toggleignoringCorrection() ) );
+		j1.b2.whenReleased( new InstantCommand( () -> driveTrain.toggleignoringCorrection() ) );
+
+		j1.b6.whenPressed( new InstantCommand( () -> driveTrain.toggleMode() ) );
 
 		// Operator
 		c2.rTrigger.whileHeld( new ShootHigh() );
 		c2.rBumper.whileHeld( new ShootLow() );
-		c2.dpadDown.whileHeld( new ThrowAway() );
+		// c2.dpadDown.whileHeld( new ThrowAway() );
+		c2.lTrigger.whileHeld( new ThrowAway() ); // Not really throw away
 		c2.dpadUp.whileHeld( new ShootTest() );
 
 		// // Climbing
@@ -150,15 +155,15 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new EncoderDrive( 0, 18, 0.5 );
-		// return new ShootLow().withTimeout( 3.0 ).andThen( 
-		// 	   new EncoderDrive( -139, -139,  0.50 ), 
-		// 	   new InstantCommand( () -> intake.goToPosition( 50 ) ),
-		// 	   new EncoderDrive( 0, 18, 0.5 ).alongWith( new TakeIn() ).withTimeout( 5.0 ),
-		// 	   new InstantCommand( () -> intake.goToPosition( 0 ) ), 
-		// 	   new TakeIn().withTimeout( 1.0 ), 
-		// 	   new EncoderDrive( 0, -18, 0.5 ),
-		// 	   new EncoderDrive( 145, 145, 0.5 ),
-		// 	   new ShootLow() );
+		return new ShootLow().withTimeout( 2.5 ).andThen( 
+			   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ), 
+			   new InstantCommand( () -> intake.goToPosition( 50 ) ),
+			   new WaitCommand( 0.5 ),
+			   new EncoderDrive( 0, 35, 0.6 ).raceWith( new TakeIn() ),
+			   new InstantCommand( () -> intake.goToPosition( 0 ) ),
+			   new WaitCommand( 0.5 ), 
+			   new EncoderDrive( 0, -28, 0.6 ).raceWith( new TakeIn() ),
+			   new EncoderDrive( 122, 122, 0.85 ).withTimeout( 3.5 ),
+			   new ShootLow() );
 	}
 }

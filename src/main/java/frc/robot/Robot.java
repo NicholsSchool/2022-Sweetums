@@ -69,7 +69,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void disabledInit() 
 	{
-		RobotContainer.hooks.set( Constants.HOOKS_OUT );
+		RobotContainer.hooks.latch();
 	}
 
 	@Override
@@ -89,7 +89,21 @@ public class Robot extends TimedRobot
 			m_autonomousCommand.schedule();
 		}
 
+		configRobot();
+	}
+	private void configRobot() 
+	{
+		RobotContainer.climber.lock();
+
 		RobotContainer.driveTrain.brake();
+
+		RobotContainer.hooks.unlatch();
+
+		RobotContainer.intake.resetEncoder();
+
+		RobotContainer.shifter.lowGear();
+
+		RobotContainer.slider.lock();
 	}
 
   	/** This function is called periodically during autonomous. */
@@ -116,7 +130,7 @@ public class Robot extends TimedRobot
   	public void teleopPeriodic() 
   	{
 		SmartDashboard.putBoolean("Low Gear", RobotContainer.shifter.get() == Constants.LOW_GEAR );
-		SmartDashboard.putBoolean("Hooks In", RobotContainer.hooks.get() == Constants.HOOKS_IN );
+		SmartDashboard.putBoolean("Hooks Latched", RobotContainer.hooks.get() == Constants.HOOKS_LATCHED );
 		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() == Constants.CLIMBER_UNLOCKED );
 		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.SLIDER_UNLOCKED );
 		SmartDashboard.putNumber( "Left Climb Position", RobotContainer.climber.getLeftClimberPosition() );

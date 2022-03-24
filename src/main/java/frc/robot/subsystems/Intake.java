@@ -32,7 +32,7 @@ public class Intake extends SubsystemBase
         // Encoder
         encoder = intake.getEncoder();
 
-        resetEncoder();
+        // resetEncoder();
 
         // PID Controller
         pidController = intake.getPIDController();

@@ -16,7 +16,7 @@ public class Slider extends SubsystemBase
     {
         slider = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.SLIDER_SOLENOID_CHANNEL );
 
-        lockSliderSolenoid();
+        // lock();
     }
 
     public boolean get() 
@@ -29,12 +29,12 @@ public class Slider extends SubsystemBase
         slider.toggle();
     }
 
-    public void lockSliderSolenoid()
+    public void lock()
     {
         slider.set( Constants.SLIDER_LOCKED );
     }
 
-    public void unlockSliderSolenoid()
+    public void unlock()
     {
         slider.set( Constants.SLIDER_UNLOCKED );
     }

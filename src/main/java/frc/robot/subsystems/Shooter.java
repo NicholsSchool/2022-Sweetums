@@ -29,11 +29,6 @@ public class Shooter extends SubsystemBase
         
         shooter.setNeutralMode( NeutralMode.Coast );
     }
-
-    public void shoot( double velocity ) 
-    {
-        
-    }
     
     public void move( double speed ) 
     {

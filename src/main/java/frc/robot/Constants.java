@@ -17,7 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public final class Constants 
 {
     // DriveTrain Constants
-    public static final double TICKS_PER_INCH = 1;
+    public static final double IN_PER_REV = 4.0 * Math.PI;
+    public static final double TICKS_PER_REV = 26500.0;
+    public static final double TICKS_PER_INCH = TICKS_PER_REV / IN_PER_REV;
+    public static final double JOYSTICK_EPSILON = 0.2;
     public static final double CLOSE_ENOUGH_DISTANCE = 3 * TICKS_PER_INCH;
 
     // Climb Power
@@ -49,10 +52,10 @@ public final class Constants
     public static final double CLOSE_ENOUGH = 250.0;
 
     // Shooter Velocities
-    public static final double HIGH_GOAL_VELOCITY = 12300.0;
+    public static final double HIGH_GOAL_VELOCITY = 12000.0; // 12300.0
     public static final double LOW_GOAL_VELOCITY = 7000.0;
-    public static final double THROW_AWAY_VELOCITY = 12000.0;
-    public static final double TEST_VELOCITY = SmartDashboard.getNumber( "Test Velocity", 1.0 );
+    public static final double THROW_AWAY_VELOCITY = 12150.0; // 12000.0 
+    public static double TEST_VELOCITY = SmartDashboard.getNumber( "Test Velocity", 1.0 );
     
     // Indexer Power
     public static final double INDEXER_SPEED = 1.0;
@@ -88,8 +91,8 @@ public final class Constants
     public static final boolean CLIMBER_LOCKED = false;
     public static final boolean CLIMBER_UNLOCKED = !CLIMBER_LOCKED;
 
-    public static final boolean HOOKS_IN = true;
-    public static final boolean HOOKS_OUT = !HOOKS_IN;
+    public static final boolean HOOKS_LATCHED = false;
+    public static final boolean HOOKS_UNLATCHED = !HOOKS_LATCHED;
 
     public static final boolean SLIDER_LOCKED = false;
     public static final boolean SLIDER_UNLOCKED = !SLIDER_LOCKED;

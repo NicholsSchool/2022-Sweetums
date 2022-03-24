@@ -27,7 +27,12 @@ public class EncoderDrive extends CommandBase
     @Override
     public void execute() 
     {
-        RobotContainer.driveTrain.move( LEFT_DISTANCE > 0? SPEED : -SPEED, RIGHT_DISTANCE > 0? SPEED : -SPEED );
+        if( RIGHT_DISTANCE == 0 )
+            RobotContainer.driveTrain.move( LEFT_DISTANCE > 0? SPEED : -SPEED, 0 );
+        if( LEFT_DISTANCE == 0 )
+            RobotContainer.driveTrain.move( 0, RIGHT_DISTANCE > 0? SPEED : -SPEED );
+        else
+            RobotContainer.driveTrain.move( LEFT_DISTANCE > 0? SPEED : -SPEED, RIGHT_DISTANCE > 0? SPEED : -SPEED );
     }
 
     @Override

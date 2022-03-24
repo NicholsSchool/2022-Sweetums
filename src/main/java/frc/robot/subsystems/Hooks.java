@@ -14,7 +14,7 @@ public class Hooks extends SubsystemBase
     {
         hooks = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.HOOKS_SOLENOID_CHANNEL );
 
-        hooks.set( Constants.HOOKS_IN );
+        // hooks.latch();
     }
 
     public boolean get() 
@@ -22,13 +22,18 @@ public class Hooks extends SubsystemBase
         return hooks.get();
     }
 
-    public void set( boolean on ) 
-    {
-        hooks.set( on );
-    }
-
     public void toggle() 
     {
         hooks.toggle();
+    }
+
+    public void latch() 
+    {
+        hooks.set( Constants.HOOKS_LATCHED );
+    }
+
+    public void unlatch() 
+    {
+        hooks.set( Constants.HOOKS_UNLATCHED );
     }
 }

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 public class DriveTrain extends SubsystemBase
@@ -21,8 +22,8 @@ public class DriveTrain extends SubsystemBase
 
     private DifferentialDrive diffDrive;
 
-    private double EPSILON = 0.2;
-    private boolean ignoreCorrection;
+    private boolean ignoreCorrection = false;
+    private boolean defenseMode = false;
 
     public DriveTrain() 
     {
@@ -36,17 +37,21 @@ public class DriveTrain extends SubsystemBase
         lFDrive.configFactoryDefault();
         lBDrive.configFactoryDefault();
 
+        rightDrives = new MotorControllerGroup( rFDrive, rBDrive );
+        leftDrives = new MotorControllerGroup( lFDrive, lBDrive );
+
+        diffDrive = new DifferentialDrive( leftDrives, rightDrives );
+        // diffDrive = new DifferentialDrive( lFDrive, rFDrive );
+
+        // rBDrive.follow( lFDrive );
+        // lBDrive.follow( rFDrive );
+
         rFDrive.setInverted( true );
         rBDrive.setInverted( true );
         lFDrive.setInverted( false );
         lBDrive.setInverted( false );
 
-        rightDrives = new MotorControllerGroup( rFDrive, rBDrive );
-        leftDrives = new MotorControllerGroup( lFDrive, lBDrive );
-
-        diffDrive = new DifferentialDrive( leftDrives, rightDrives );
-
-        ignoreCorrection = false;
+        // setToIgnoreCorrection( false );
     }
 
     public void move( double leftSpeed, double rightSpeed ) 
@@ -54,27 +59,32 @@ public class DriveTrain extends SubsystemBase
         SmartDashboard.putNumber( "Left Stick Y", leftSpeed );
         SmartDashboard.putNumber( "Right Stick Y", rightSpeed );
 
-        if( Math.abs( rightSpeed - leftSpeed ) < EPSILON && 
-            rightSpeed * leftSpeed > 0 && 
-            !ignoreCorrection )
+        if( Math.abs( rightSpeed - leftSpeed ) < Constants.JOYSTICK_EPSILON && // if we're close enough...
+            rightSpeed * leftSpeed > 0 &&  // and on the same side...
+            !ignoreCorrection ) // and we're not ignoring correction...
         {
-            diffDrive.tankDrive( rightSpeed, rightSpeed );
+            diffDrive.tankDrive( defenseMode? -rightSpeed : rightSpeed, defenseMode? -rightSpeed : rightSpeed ); // correct.
 
-            SmartDashboard.putNumber( "leftSpeed", rightSpeed );
+            SmartDashboard.putNumber( "leftSpeed", rightSpeed ); 
             SmartDashboard.putNumber( "rightSpeed", rightSpeed );
         }
-        else 
+        else // otherwise...
         {
-            diffDrive.tankDrive( leftSpeed, rightSpeed );
+            diffDrive.tankDrive( defenseMode? -leftSpeed : leftSpeed, defenseMode? -rightSpeed : rightSpeed ); // don't.
 
             SmartDashboard.putNumber( "leftSpeed", leftSpeed );
             SmartDashboard.putNumber( "rightSpeed", rightSpeed );
         }
     }
 
-    public void setToIgnoreCorrection( boolean willIgnore ) 
+    public void toggleignoringCorrection() 
     {
-        ignoreCorrection = willIgnore;
+        ignoreCorrection = !ignoreCorrection;
+    }
+
+    public void toggleMode() 
+    {
+        defenseMode = !defenseMode;
     }
 
     public void stop() 

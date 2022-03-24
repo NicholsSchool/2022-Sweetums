@@ -49,7 +49,7 @@ public class Climber extends SubsystemBase
 
         climberSolenoid = new Solenoid( PneumaticsModuleType.CTREPCM, RobotMap.CLIMBER_SLOENOID_CHANNEL );
 
-        lockClimberSolenoid();
+        // lock();
 
         rightClimbPIDController = rightClimb.getPIDController();
 
@@ -73,9 +73,7 @@ public class Climber extends SubsystemBase
         leftClimbPIDController.setD( Constants.LEFT_CLIMB_D );
         leftClimbPIDController.setIZone( Constants.LEFT_CLIMB_Iz );
         leftClimbPIDController.setFF( Constants.LEFT_CLIMB_FF );
-        leftClimbPIDController.setOutputRange( Constants.LEFT_CLIMB_MIN_OUTPUT , Constants.LEFT_CLIMB_MAX_OUTPUT );
-
-        
+        leftClimbPIDController.setOutputRange( Constants.LEFT_CLIMB_MIN_OUTPUT , Constants.LEFT_CLIMB_MAX_OUTPUT );    
     }
 
     public void climb( double power ) 
@@ -88,14 +86,6 @@ public class Climber extends SubsystemBase
     {
         rightClimbPIDController.setReference( rightPosition, CANSparkMax.ControlType.kPosition );
         leftClimbPIDController.setReference( leftPosition, CANSparkMax.ControlType.kPosition );
-    }
-
-    public void climbAtVelocity( double velocity ) 
-    {
-        rightClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );
-        leftClimbPIDController.setReference( velocity, CANSparkMax.ControlType.kVelocity );
-        // rightClimbPIDController.setReference( rightTooFarAhead()? velocity / 3 : velocity, CANSparkMax.ControlType.kVelocity );
-        // leftClimbPIDController.setReference( leftTooFarAhead()? velocity / 3 : velocity, CANSparkMax.ControlType.kVelocity );
     }
 
     public void stop() 
@@ -130,12 +120,12 @@ public class Climber extends SubsystemBase
         climberSolenoid.toggle();
     }
 
-    public void lockClimberSolenoid() 
+    public void lock() 
     {
         climberSolenoid.set( Constants.CLIMBER_LOCKED );
     }
 
-    public void unlockClimberSolenoid() 
+    public void unlock() 
     {
         climberSolenoid.set( Constants.CLIMBER_UNLOCKED );
     }
