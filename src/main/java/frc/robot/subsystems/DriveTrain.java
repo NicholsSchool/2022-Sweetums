@@ -22,7 +22,7 @@ public class DriveTrain extends SubsystemBase
 
     private DifferentialDrive diffDrive;
 
-    private boolean ignoreCorrection = false;
+    private boolean ignoreCorrection = true;
     private boolean defenseMode = false;
 
     public DriveTrain() 
