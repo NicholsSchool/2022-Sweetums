@@ -132,11 +132,19 @@ public class RobotContainer
 		// c2.dpadLeft.whenPressed( new InstantCommand( () -> climber.resetClimberEncoders() ) );
 
 		c2.a.whenPressed( new InstantCommand( () -> climber.toggleClimberSolenoid() ) );
-		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
+
 		c2.b.whenPressed( new InstantCommand( () -> hooks.toggle() ) );
+
 		c2.y.whenPressed( new InstantCommand( () -> slider.toggle() ) );
+
 		c2.x.toggleWhenPressed( new TuckIntake() );
+		c2.x.whenPressed( new InstantCommand( () -> hooks.toggle() ).andThen( 
+						  new InstantCommand( () -> slider.toggle() ) ) );
+
 		c2.dpadRight.whileHeld( new InstantCommand( () -> climber.resetClimberEncoders() ).andThen( new PIDClimb( 78, 78 ) ) );
+
+		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
+		
 		c2.start.whileHeld( new PIDClimb( 90, 90 ) );
 	}
 
@@ -155,19 +163,19 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new ShootLow().withTimeout( 2.5 ).andThen( 
-			   new WaitCommand( 5.0 ),
-			   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ) );
-			   
 		// return new ShootLow().withTimeout( 2.5 ).andThen( 
-		// 	   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ), 
-		// 	   new InstantCommand( () -> intake.goToPosition( 50 ) ),
-		// 	   new WaitCommand( 0.5 ),
-		// 	   new EncoderDrive( 0, 35, 0.6 ).raceWith( new TakeIn() ),
-		// 	   new InstantCommand( () -> intake.goToPosition( 0 ) ),
-		// 	   new WaitCommand( 0.5 ), 
-		// 	   new EncoderDrive( 0, -28, 0.6 ).raceWith( new TakeIn() ),
-		// 	   new EncoderDrive( 122, 122, 0.85 ).withTimeout( 3.5 ),
-		// 	   new ShootLow() );
+		// 	   new WaitCommand( 5.0 ),
+		// 	   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ) );
+			   
+		return new ShootLow().withTimeout( 2.5 ).andThen( 
+			   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ), 
+			   new InstantCommand( () -> intake.goToPosition( 50 ) ),
+			   new WaitCommand( 0.5 ),
+			   new EncoderDrive( 0, 35, 0.6 ).raceWith( new TakeIn() ),
+			   new InstantCommand( () -> intake.goToPosition( 0 ) ),
+			   new WaitCommand( 0.5 ), 
+			   new EncoderDrive( 0, -28, 0.6 ).raceWith( new TakeIn() ),
+			   new EncoderDrive( 122, 122, 0.85 ).withTimeout( 3.5 ),
+			   new ShootLow() );
 	}
 }
