@@ -156,14 +156,18 @@ public class RobotContainer
 	public Command getAutonomousCommand() 
 	{
 		return new ShootLow().withTimeout( 2.5 ).andThen( 
-			   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ), 
-			   new InstantCommand( () -> intake.goToPosition( 50 ) ),
-			   new WaitCommand( 0.5 ),
-			   new EncoderDrive( 0, 35, 0.6 ).raceWith( new TakeIn() ),
-			   new InstantCommand( () -> intake.goToPosition( 0 ) ),
-			   new WaitCommand( 0.5 ), 
-			   new EncoderDrive( 0, -28, 0.6 ).raceWith( new TakeIn() ),
-			   new EncoderDrive( 122, 122, 0.85 ).withTimeout( 3.5 ),
-			   new ShootLow() );
+			   new WaitCommand( 5.0 ),
+			   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ) );
+			   
+		// return new ShootLow().withTimeout( 2.5 ).andThen( 
+		// 	   new EncoderDrive( -117, -117,  0.75 ).withTimeout( 3.5 ), 
+		// 	   new InstantCommand( () -> intake.goToPosition( 50 ) ),
+		// 	   new WaitCommand( 0.5 ),
+		// 	   new EncoderDrive( 0, 35, 0.6 ).raceWith( new TakeIn() ),
+		// 	   new InstantCommand( () -> intake.goToPosition( 0 ) ),
+		// 	   new WaitCommand( 0.5 ), 
+		// 	   new EncoderDrive( 0, -28, 0.6 ).raceWith( new TakeIn() ),
+		// 	   new EncoderDrive( 122, 122, 0.85 ).withTimeout( 3.5 ),
+		// 	   new ShootLow() );
 	}
 }
