@@ -5,15 +5,15 @@ import frc.robot.RobotContainer;
 
 public class PIDClimb extends CommandBase 
 {
-    private double leftPosition;
-    private double rightPosition;
+    private double LEFT_POSITION;
+    private double RIGHT_POSITION;
 
-    public PIDClimb( double lP, double rP ) 
+    public PIDClimb( double leftPosition, double rightPosition ) 
     {
         addRequirements( RobotContainer.climber );
 
-        leftPosition = lP;
-        rightPosition = rP;
+        LEFT_POSITION = leftPosition;
+        RIGHT_POSITION = rightPosition;
     }    
 
     @Override
@@ -21,7 +21,7 @@ public class PIDClimb extends CommandBase
     {
         RobotContainer.climber.resetClimberEncoders();
 
-        RobotContainer.climber.climbToPositions( leftPosition, rightPosition );
+        RobotContainer.climber.climbToPositions( LEFT_POSITION, RIGHT_POSITION );
     }
 
     @Override

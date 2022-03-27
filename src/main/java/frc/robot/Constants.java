@@ -20,7 +20,7 @@ public final class Constants
     public static final double IN_PER_REV = 4.0 * Math.PI;
     public static final double TICKS_PER_REV = 26500.0;
     public static final double TICKS_PER_INCH = TICKS_PER_REV / IN_PER_REV;
-    public static final double JOYSTICK_EPSILON = 0.2;
+    public static final double JOYSTICK_EPSILON = 0.5;
     public static final double CLOSE_ENOUGH_DISTANCE = 3 * TICKS_PER_INCH;
 
     // Climb Power
@@ -52,9 +52,9 @@ public final class Constants
     public static final double CLOSE_ENOUGH = 250.0;
 
     // Shooter Velocities
-    public static final double HIGH_GOAL_VELOCITY = 12000.0; // 12300.0
+    public static final double HIGH_GOAL_VELOCITY = 11290.0; // 12300.0 // 12000.0 // 11800.0
     public static final double LOW_GOAL_VELOCITY = 7000.0;
-    public static final double THROW_AWAY_VELOCITY = 12150.0; // 12000.0 
+    public static final double THROW_AWAY_VELOCITY = 15000.0; // 12000.0 // 12150.0
     public static double TEST_VELOCITY = SmartDashboard.getNumber( "Test Velocity", 1.0 );
     
     // Indexer Power

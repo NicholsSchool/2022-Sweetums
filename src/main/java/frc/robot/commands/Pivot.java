@@ -1,17 +1,25 @@
-package frc.robot.autonomous;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class GyroTurn extends CommandBase
+public class Pivot extends CommandBase
 {
+    private final Side SIDE;
     private final double ANGLE;
     private final double SPEED;
 
-    public GyroTurn( double angle, double speed ) 
+    public static enum Side 
+    {
+        RIGHT,
+        LEFT;
+    }
+
+    public Pivot( Side side, double angle, double speed ) 
     {
         addRequirements( RobotContainer.driveTrain );
 
+        SIDE = side;
         ANGLE = angle;
         SPEED = speed;
     }
@@ -25,9 +33,14 @@ public class GyroTurn extends CommandBase
     @Override
     public void execute() 
     {
-        double angleAt = RobotContainer.navX.getAngle();
-
-        RobotContainer.driveTrain.move( ANGLE - angleAt > 0? -SPEED : SPEED, ANGLE - angleAt > 0? SPEED : -SPEED );
+        switch( SIDE ) 
+        {
+            case RIGHT:
+                RobotContainer.driveTrain.move( 0, ANGLE > 0? SPEED : -SPEED );
+                break;
+            case LEFT:
+                RobotContainer.driveTrain.move( ANGLE > 0? -SPEED : SPEED, 0 );
+        }
     }
 
     @Override
@@ -39,6 +52,6 @@ public class GyroTurn extends CommandBase
     @Override
     public boolean isFinished() 
     {
-        return RobotContainer.navX.atAngle( ANGLE ); 
+        return RobotContainer.navX.atAngle( ANGLE );
     }
 }

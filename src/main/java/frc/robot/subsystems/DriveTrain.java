@@ -22,7 +22,7 @@ public class DriveTrain extends SubsystemBase
 
     private DifferentialDrive diffDrive;
 
-    private boolean ignoreCorrection = true;
+    private boolean ignoreCorrection = false;
     private boolean defenseMode = false;
 
     public DriveTrain() 
@@ -56,28 +56,21 @@ public class DriveTrain extends SubsystemBase
 
     public void move( double leftSpeed, double rightSpeed ) 
     {
-        SmartDashboard.putNumber( "Left Stick Y", leftSpeed );
-        SmartDashboard.putNumber( "Right Stick Y", rightSpeed );
-
         if( Math.abs( rightSpeed - leftSpeed ) < Constants.JOYSTICK_EPSILON && // if we're close enough...
             rightSpeed * leftSpeed > 0 &&  // and on the same side...
             !ignoreCorrection ) // and we're not ignoring correction...
         {
             diffDrive.tankDrive( defenseMode? -rightSpeed : rightSpeed, defenseMode? -rightSpeed : rightSpeed ); // correct.
-
-            SmartDashboard.putNumber( "leftSpeed", rightSpeed ); 
-            SmartDashboard.putNumber( "rightSpeed", rightSpeed );
+            SmartDashboard.putBoolean( "BEN YOU ARE BEING CORRECTED", true );
         }
         else // otherwise...
         {
             diffDrive.tankDrive( defenseMode? -leftSpeed : leftSpeed, defenseMode? -rightSpeed : rightSpeed ); // don't.
-
-            SmartDashboard.putNumber( "leftSpeed", leftSpeed );
-            SmartDashboard.putNumber( "rightSpeed", rightSpeed );
+            SmartDashboard.putBoolean( "BEN YOU ARE BEING CORRECTED", false );
         }
     }
 
-    public void toggleignoringCorrection() 
+    public void toggleIgnoringCorrection() 
     {
         ignoreCorrection = !ignoreCorrection;
     }

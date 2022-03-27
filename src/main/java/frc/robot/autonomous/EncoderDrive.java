@@ -13,6 +13,7 @@ public class EncoderDrive extends CommandBase
     public EncoderDrive( double leftDistance, double rightDistance, double speed ) 
     {        
         addRequirements( RobotContainer.driveTrain );
+        
         RIGHT_DISTANCE = rightDistance * Constants.TICKS_PER_INCH; // Can be + or -, + for going forward, - for going backward
         LEFT_DISTANCE = leftDistance * Constants.TICKS_PER_INCH;
         SPEED = Math.abs( speed );

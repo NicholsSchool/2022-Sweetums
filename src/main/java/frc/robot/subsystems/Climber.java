@@ -115,7 +115,7 @@ public class Climber extends SubsystemBase
         return climberSolenoid.get();
     }
 
-    public void toggleClimberSolenoid() 
+    public void toggleSolenoid() 
     {
         climberSolenoid.toggle();
     }

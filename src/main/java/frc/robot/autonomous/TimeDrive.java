@@ -6,7 +6,6 @@ import frc.robot.RobotContainer;
 public class TimeDrive extends CommandBase 
 {
     private final long START_TIME;
-
     private final double SPEED;
     
     public TimeDrive( int time, double speed ) 
@@ -14,7 +13,6 @@ public class TimeDrive extends CommandBase
         addRequirements( RobotContainer.driveTrain );
 
         START_TIME = System.currentTimeMillis();
-
         SPEED = speed;
     }
 

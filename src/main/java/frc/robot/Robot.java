@@ -133,11 +133,6 @@ public class Robot extends TimedRobot
 		SmartDashboard.putBoolean("Hooks Latched", RobotContainer.hooks.get() == Constants.HOOKS_LATCHED );
 		SmartDashboard.putBoolean("Climber Unlocked", RobotContainer.climber.get() == Constants.CLIMBER_UNLOCKED );
 		SmartDashboard.putBoolean("Slider Unlocked", RobotContainer.slider.get() == Constants.SLIDER_UNLOCKED );
-		SmartDashboard.putNumber( "Left Climb Position", RobotContainer.climber.getLeftClimberPosition() );
-		SmartDashboard.putNumber( "Right Climb Position", RobotContainer.climber.getRightClimberPosition() );
-		SmartDashboard.putNumber( "Front Right Encoder Value", RobotContainer.driveTrain.getFrontRightEncoderValue() );
-		SmartDashboard.putNumber( "Front Left Encoder Value", RobotContainer.driveTrain.getFrontLeftEncoderValue() );
-		SmartDashboard.putNumber( "Test Velocity", Constants.TEST_VELOCITY );
 		RobotContainer.getRobotState();
   	}
 
