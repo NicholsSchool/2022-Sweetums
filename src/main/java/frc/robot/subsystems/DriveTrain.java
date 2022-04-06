@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
 public class DriveTrain extends SubsystemBase
@@ -23,7 +24,14 @@ public class DriveTrain extends SubsystemBase
     private DifferentialDrive diffDrive;
 
     private boolean ignoreCorrection = false;
-    private boolean defenseMode = false;
+
+    public static enum Mode 
+    {
+        NORMAL,
+        DEFENSE;
+    }
+
+    private Mode mode;
 
     public DriveTrain() 
     {
@@ -56,18 +64,19 @@ public class DriveTrain extends SubsystemBase
 
     public void move( double leftSpeed, double rightSpeed ) 
     {
-        if( Math.abs( rightSpeed - leftSpeed ) < Constants.JOYSTICK_EPSILON && // if we're close enough...
+        if( Math.abs( rightSpeed - leftSpeed ) < Constants.JOYSTICKS_CLOSE_ENOUGH && // if we're close enough...
+            Math.abs( rightSpeed ) > Constants.JOYSTICK_DRIFT_THRESHOLD && Math.abs( leftSpeed ) > Constants.JOYSTICK_DRIFT_THRESHOLD &&
             rightSpeed * leftSpeed > 0 &&  // and on the same side...
             !ignoreCorrection ) // and we're not ignoring correction...
         {
-            diffDrive.tankDrive( defenseMode? -rightSpeed : rightSpeed, defenseMode? -rightSpeed : rightSpeed ); // correct.
+            leftSpeed = rightSpeed;
             SmartDashboard.putBoolean( "BEN YOU ARE BEING CORRECTED", true );
         }
         else // otherwise...
-        {
-            diffDrive.tankDrive( defenseMode? -leftSpeed : leftSpeed, defenseMode? -rightSpeed : rightSpeed ); // don't.
             SmartDashboard.putBoolean( "BEN YOU ARE BEING CORRECTED", false );
-        }
+        
+        RobotContainer.driveTrain.move( mode == Mode.DEFENSE? -rightSpeed : leftSpeed, 
+                                        mode == Mode.DEFENSE? -leftSpeed : rightSpeed ); // do this, i guess
     }
 
     public void toggleIgnoringCorrection() 
@@ -77,7 +86,8 @@ public class DriveTrain extends SubsystemBase
 
     public void toggleMode() 
     {
-        defenseMode = !defenseMode;
+        mode = mode == Mode.NORMAL? Mode.DEFENSE : Mode.NORMAL;
+        SmartDashboard.putBoolean( "DEFENSE MODE", mode == Mode.DEFENSE );
     }
 
     public void stop() 
