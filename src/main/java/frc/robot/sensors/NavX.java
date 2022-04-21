@@ -36,7 +36,7 @@ public class NavX {
      */
     public boolean atAngle( double angle ) 
     {
-        return Math.abs( -getAngle() - angle ) < Constants.CLOSE_ENOUGH_ANGLE;
+        return Math.abs( getAngle() - angle ) < Constants.CLOSE_ENOUGH_ANGLE;
     }
     /**
      * Resets the navX

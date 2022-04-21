@@ -75,8 +75,8 @@ public class DriveTrain extends SubsystemBase
         else // otherwise...
             SmartDashboard.putBoolean( "BEN YOU ARE BEING CORRECTED", false );
         
-        RobotContainer.driveTrain.move( mode == Mode.DEFENSE? -rightSpeed : leftSpeed, 
-                                        mode == Mode.DEFENSE? -leftSpeed : rightSpeed ); // do this, i guess
+        diffDrive.tankDrive( mode == Mode.DEFENSE? -rightSpeed : leftSpeed, 
+                             mode == Mode.DEFENSE? -leftSpeed : rightSpeed ); // do this, i guess
     }
 
     public void toggleIgnoringCorrection() 

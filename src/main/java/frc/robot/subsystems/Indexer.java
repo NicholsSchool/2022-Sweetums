@@ -12,7 +12,7 @@ public class Indexer extends SubsystemBase
 {
     private CANSparkMax indexer;
 
-    public Indexer() 
+    public Indexer()
     {
         indexer = new CANSparkMax( RobotMap.INDEXER_ID, MotorType.kBrushless );
         

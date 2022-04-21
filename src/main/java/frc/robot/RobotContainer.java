@@ -141,7 +141,7 @@ public class RobotContainer
 
 		c2.select.toggleWhenPressed( ( new TuckClimber() ).withInterrupt( () -> c2.start.get() ) );
 		
-		c2.start.whileHeld( new PIDClimb( 90, 90 ) );
+		c2.start.whileHeld( new PIDClimb( 100, 100 ) );
 	}
 
 	public static void getRobotState() 
@@ -159,19 +159,19 @@ public class RobotContainer
 	 */
 	public Command getAutonomousCommand() 
 	{
-		return new ShootHigh().withTimeout( 3.0 ).andThen( 
-			   new EncoderDrive( -84, -84,  0.75 ).withTimeout( 3.5 ) );
+		// return new ShootHigh().withTimeout( 3.0 ).andThen( 
+		// 	   new EncoderDrive( -84, -84,  0.75 ).withTimeout( 3.5 ) );
 			   
-		// return new ShootHigh().withTimeout( 2.5 ).andThen( 
-		// 	   new EncoderDrive( -121, -121,  0.75 ).withTimeout( 3.5 ), 
-		// 	   new InstantCommand( () -> intake.goToPosition( 50 ) ),
-		// 	   new WaitCommand( 0.5 ),
-		// 	   new EncoderDrive( 0, 60, 0.6 ).raceWith( new TakeIn() ),
-		// 	   new InstantCommand( () -> intake.goToPosition( 0 ) ),
-		// 	   new WaitCommand( 0.5 ), 
-		// 	   new EncoderDrive( 0, -45, 0.6 ).raceWith( new TakeIn() ),
-		// 	   new EncoderDrive( 126, 126, 0.85 ).withTimeout( 3.5 ),
-		// 	   new ShootLow() );
+		return new ShootHigh().withTimeout( 2.5 ).andThen( 
+			   new EncoderDrive( -121, -121,  0.75 ).withTimeout( 3.5 ), 
+			   new InstantCommand( () -> intake.goToPosition( 50 ) ),
+			   new WaitCommand( 0.5 ),
+			   new EncoderDrive( 0, 60, 0.6 ).raceWith( new TakeIn() ),
+			   new InstantCommand( () -> intake.goToPosition( 0 ) ),
+			   new WaitCommand( 0.5 ), 
+			   new EncoderDrive( 0, -45, 0.6 ).raceWith( new TakeIn() ),
+			   new EncoderDrive( 126, 126, 0.85 ).withTimeout( 3.5 ),
+			   new ShootLow() );
 
 		// return new ShootHigh().withTimeout( 2.5 ).andThen( 
 		// 	   new EncoderDrive( -121, -121,  0.75 ).withTimeout( 3.5 ), 
