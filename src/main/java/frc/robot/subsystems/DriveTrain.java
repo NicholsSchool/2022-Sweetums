@@ -23,7 +23,12 @@ public class DriveTrain extends SubsystemBase
 
     private DifferentialDrive diffDrive;
 
-    private boolean ignoreCorrection = false;
+    private boolean ignoreCorrection;
+
+    private long time;
+    private double origin;
+    private double rightJoystickDistance;
+    private double leftJoystickDistance;
 
     public static enum Mode 
     {
@@ -60,10 +65,35 @@ public class DriveTrain extends SubsystemBase
         lBDrive.setInverted( false );
 
         // setToIgnoreCorrection( false );
+
+        ignoreCorrection = false;
+
+        time = System.currentTimeMillis();
+        origin = 0.0;
+        rightJoystickDistance = 0.0;
+        leftJoystickDistance = 0.0;
     }
 
     public void move( double leftSpeed, double rightSpeed ) 
     {
+        if( Math.abs( rightSpeed ) > Math.abs( rightJoystickDistance ) ) 
+            rightJoystickDistance = rightSpeed;
+        else 
+        {
+            time = System.currentTimeMillis();
+            rightJoystickDistance = 0;
+            origin = rightSpeed;
+        }
+
+        if( Math.abs( leftSpeed ) > Math.abs( leftJoystickDistance ) ) 
+            leftJoystickDistance = leftSpeed;
+        else 
+        {
+            time = System.currentTimeMillis();
+            leftJoystickDistance = 0;
+            origin = leftSpeed;
+        }
+
         if( Math.abs( rightSpeed - leftSpeed ) < Constants.JOYSTICKS_CLOSE_ENOUGH && // if we're close enough...
             Math.abs( rightSpeed ) > Constants.JOYSTICK_DRIFT_THRESHOLD && Math.abs( leftSpeed ) > Constants.JOYSTICK_DRIFT_THRESHOLD &&
             rightSpeed * leftSpeed > 0 &&  // and on the same side...
@@ -75,8 +105,12 @@ public class DriveTrain extends SubsystemBase
         else // otherwise...
             SmartDashboard.putBoolean( "BEN YOU ARE BEING CORRECTED", false );
         
-        diffDrive.tankDrive( mode == Mode.DEFENSE? -rightSpeed : leftSpeed, 
-                             mode == Mode.DEFENSE? -leftSpeed : rightSpeed ); // do this, i guess
+        diffDrive.tankDrive( mode == Mode.DEFENSE? sigmoid( time, -rightSpeed ) : sigmoid( time, leftSpeed ), 
+                             mode == Mode.DEFENSE? sigmoid( time, -leftSpeed ) : sigmoid( time, rightSpeed ) ); // do this, i guess
+    }
+    private double sigmoid( double time, double a ) 
+    {
+        return 2 / ( 1 + Math.pow( Math.E, -time * a ) ) - 1;
     }
 
     public void toggleIgnoringCorrection() 
